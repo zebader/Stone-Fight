@@ -85,7 +85,7 @@ Player.prototype.updateXPosition(){
 Player.prototype.draw(){
 }
 
-Player.prototype.block(){
+Player.prototype.blockPlayer(){
 }
 
 Player.prototype.checkCollisionWithBlock(block){
@@ -101,7 +101,7 @@ Rock(){
   this.canvas;
   this.ctx;
   this.gravity;
-  this.desacceleration;
+  this.deceleration;
   this.shotSpeed;
 }
 
@@ -126,7 +126,7 @@ Wall(){
 Wall.prototype.draw(){
 }
 ```
-## Task
+## Task - WIP
 - Main - buildDom
 - Main - buildSplash
 - Main - addEventListener
@@ -160,7 +160,7 @@ Wall.prototype.draw(){
 
 ### Git
 URls for the project repo and deploy
-[Link Repo](https://github.com/Gabriel0liver/skull-jumper)
+[Link Repo](https://github.com/zebader/Stone-Fight)
 [Link Deploy]()
 
 
