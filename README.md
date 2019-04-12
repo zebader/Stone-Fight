@@ -88,7 +88,7 @@ Player.prototype.draw(){
 Player.prototype.blockPlayer(){
 }
 
-Player.prototype.checkCollisionWithBlock(block){
+Player.prototype.checkCollisionWithWall(wall){
 }
 ```
 
@@ -132,9 +132,8 @@ Wall.prototype.draw(){
 - Main - addEventListener
 - Main - destroySplash
 - Main - 3 states transitions
-- Game - buildDom
-- Game - TimeOut test
-- Game - 3 states transitions
+- Game - loop
+- Game - Create Player,rock and wall
 - Main - GameWon
 - Main - destroy Game
 - Main - GameWon RESTART
@@ -142,7 +141,6 @@ Wall.prototype.draw(){
 - Game - restartGame
 - Game - addEventListener
 - Wall - create
-- Game - create player
 - Player - create
 - Player - move
 - Player - collision
