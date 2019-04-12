@@ -39,24 +39,25 @@ Stone Fight it's a game where 2 players throws stones by turns to each other acr
 ### game.js
 ```
 Game(){
+  this.player;
+  this.rock;
+  this.wall;
   this.canvas;
   this.ctx;
-}
-
-Game.prototype.startGame(){
+  this.gameOver;
 }
 
 Game.prototype.startLoop(){
   loop()
 }
 
-Game.prototype.updateAll(){
+Game.prototype.updateCanvas(){
 }
 
-Game.prototype.clearAll(){
+Game.prototype.clearCanvas(){
 }
 
-Game.prototype.renderAll(){
+Game.prototype.drawCanvas(){
 }
 
 Game.prototype.checkAllCollisons(){

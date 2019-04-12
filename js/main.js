@@ -27,7 +27,7 @@ function main(){
 
     const containerElement = document.querySelector('.game-container');
     const gameWidth = containerElement.offsetWidth;
-    const gameHeight = containerElement.offsetheight;
+    const gameHeight = containerElement.offsetHeight;
 
     const canvasElement = document.querySelector('canvas');
 
@@ -35,7 +35,24 @@ function main(){
     canvasElement.setAttribute('height',gameHeight);
 
     const game = new Game(canvasElement);
+    game.startLoop();
 
+    document.addEventListener('keydown', function(event){
+      const key = event.keyCode;
+      if(key === 37){
+        game.player.setDirection(-1);}
+      else if (key === 39){
+        game.player.setDirection(1);
+      }
+      });
+    document.addEventListener('keyup', function(event){
+      const key = event.keyCode;
+      if(key !== 37 || key !== 39){
+        game.player.setDirection(0)
+      }
+      });
+
+    
 
    // setTimeout(buildGameOverScreen, 3000);
   }
