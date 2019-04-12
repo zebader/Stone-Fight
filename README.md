@@ -1,4 +1,4 @@
-# SKULL JUMPER
+# STONE FIGHT
 
 ## Description
 Stone Fight it's a game where 2 players throws stones by turns to each other across a wall placed in the middle of the screen, the objective is to kill the other player by decreasing the HP.
@@ -79,13 +79,10 @@ Player(){
   this.speed;
 }
 
-Player.prototype.update(){
+Player.prototype.updateXPosition(){
 }
 
 Player.prototype.draw(){
-}
-
-Player.prototype.move(){
 }
 
 Player.prototype.block(){
@@ -103,15 +100,15 @@ Rock(){
   this.size;
   this.canvas;
   this.ctx;
-}
-
-Character.prototype.update(){
+  this.gravity;
+  this.desacceleration;
+  this.shotSpeed;
 }
 
 Character.prototype.draw(){
 }
 
-Character.prototype.throw(){
+Character.prototype.throwPhysics(){
 }
 
 ```
@@ -119,18 +116,16 @@ Character.prototype.throw(){
 ### wall.js
 ```
 Wall(){
-  this.x;
-  this.y;
+  this.x1;
+  this.x2;
   this.size;
   this.canvas;
   this.ctx;
 }
 
-Wall.prototype.render(){
+Wall.prototype.draw(){
 }
 ```
-
-
 ## Task
 - Main - buildDom
 - Main - buildSplash
