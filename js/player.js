@@ -23,6 +23,9 @@ Player.prototype.draw = function(){
   this.ctx.fillStyle = 'purple';
   this.ctx.fillRect(this.x,this.y,this.size,this.size);
 }
+Player.prototype.setLives = function(){
+  this.lives--;
+}
 
 Player.prototype.blockPlayer = function(){
 }

@@ -86,6 +86,12 @@ Player.prototype.updateXPosition(){
 Player.prototype.draw(){
 }
 
+Player.prototype.setDirection(){
+}
+
+Player.prototype.setLives(){
+}
+
 Player.prototype.blockPlayer(){
 }
 

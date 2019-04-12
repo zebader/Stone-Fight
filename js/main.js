@@ -51,6 +51,10 @@ function main(){
         game.player.setDirection(0)
       }
       });
+    document.addEventListener('click', function(event){
+      game.rock.setDirection(1);
+        });
+    
 
     
 
