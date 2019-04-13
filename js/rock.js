@@ -7,7 +7,7 @@ function Rock(canvas,shotSpeed,shotAngle){
   this.y = 0;
   this.ctx = this.canvas.getContext('2d');
   this.direction = 0;
-  this.gravity = 9.8;
+  this.gravity = 0.5;
   this.velocityX = shotSpeed*(Math.cos(shotAngle*Math.PI/180));
   this.velocityY = shotSpeed*(Math.sin(shotAngle*Math.PI/180));
   this.time = 0;
@@ -32,7 +32,7 @@ Rock.prototype.updatePosition = function(){
     this.time = 0;
   }
   else{
-    this.time +=1;
+    this.time +=0.6;
   }
 
   console.log('triggered',this.x, this.y)
@@ -45,4 +45,12 @@ Rock.prototype.setDirection = function(newDirection){
 Rock.prototype.draw = function(){
   this.ctx.fillStyle = 'red';
   this.ctx.fillRect(this.x,this.y,this.size,this.size);
+}
+
+Rock.prototype.checkCollisionWithWall = function(wall){
+  const collisionRight = this.x + this.size/2 > wall.x;
+  const collisionLeft = this.x - this.size/2 < wall.x + wall.sizeX;
+  const collisionTop = this.y - this.size/2 < wall.y + wall.sizeY;
+
+  return collisionRight && collisionLeft && collisionTop;
 }

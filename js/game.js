@@ -9,14 +9,17 @@ function Game(canvas){
   this.gameOver = false;
 }
 
-var rockSpeed = 100;
-var rockAngle = 45;
+var rockSpeed = 25;
+var rockAngle = 75;
 
 Game.prototype.startLoop = function(){
   
 
   this.player = new Player(this.canvas);
+  
   this.rock = new Rock(this.canvas,rockSpeed,rockAngle);
+
+  this.wall = new Wall(this.canvas);
 
   
   
@@ -29,10 +32,7 @@ Game.prototype.startLoop = function(){
     if (this.gameOver === false){
       window.requestAnimationFrame(loop);
     }
-   if(this.rock.y > this.canvas.height){
-      this.gameOver = true;
-      this.onGameOver();
-    }
+
   }
 
   window.requestAnimationFrame(loop);
@@ -45,15 +45,26 @@ Game.prototype.clearCanvas = function(){
 Game.prototype.updateCanvas = function(){
 
   this.player.updateXPosition();
-  this.rock.setPositionStart(this.player.updateXPosition());
+  this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2);
   this.rock.updatePosition();
 
 }
 Game.prototype.drawCanvas = function(){
   this.player.draw();
   this.rock.draw();
+  this.wall.draw();
 }
 Game.prototype.checkCollision = function(){
+
+  if (this.rock.checkCollisionWithWall(this.wall)){
+    this.gameOver = true;
+    this.onGameOver();
+  }
+  if(this.rock.y > this.canvas.height){
+    this.gameOver = true;
+    this.onGameOver();
+  }
+  
   
 }
 

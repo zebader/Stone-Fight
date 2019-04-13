@@ -9,10 +9,14 @@ function Player(canvas){
   this.lives = 3;
   this.direction = 0;
   this.speed = 3;
+ // this.ifFixedPosition = false;
 }
 
 Player.prototype.updateXPosition = function(){
   this.x = this.x + this.direction*this.speed;
+  if(this.x < 0){
+    this.x = 0
+  }
   return this.x
 }
 Player.prototype.setDirection = function(newDirection){
@@ -28,7 +32,8 @@ Player.prototype.setLives = function(){
   this.lives--;
 }
 
-Player.prototype.blockPlayer = function(){
+Player.prototype.blockPlayer = function(fixedPos){
+
 }
 
 Player.prototype.checkCollisionWithWall = function(wall){
