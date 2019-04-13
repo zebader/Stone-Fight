@@ -3,7 +3,7 @@
 function Player(canvas){
   this.canvas = canvas;
   this.size = 100;
-  this.x = 0;
+  this.x = canvas.width/5;
   this.y = canvas.height - this.size;
   this.ctx = this.canvas.getContext('2d');;
   this.lives = 3;
@@ -13,6 +13,7 @@ function Player(canvas){
 
 Player.prototype.updateXPosition = function(){
   this.x = this.x + this.direction*this.speed;
+  return this.x
 }
 Player.prototype.setDirection = function(newDirection){
   this.direction = newDirection;

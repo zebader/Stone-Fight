@@ -9,11 +9,17 @@ function Game(canvas){
   this.gameOver = false;
 }
 
+var rockSpeed = 100;
+var rockAngle = 45;
+
 Game.prototype.startLoop = function(){
+  
 
   this.player = new Player(this.canvas);
-  this.rock = new Rock(this.canvas,100,60);
+  this.rock = new Rock(this.canvas,rockSpeed,rockAngle);
 
+  
+  
   const loop = () => { // por el scope con set timers hay que utilizar binding o arrow functions
 
     this.clearCanvas();
@@ -23,7 +29,7 @@ Game.prototype.startLoop = function(){
     if (this.gameOver === false){
       window.requestAnimationFrame(loop);
     }
-    if(this.rock.y > this.canvas.height){
+   if(this.rock.y > this.canvas.height){
       this.gameOver = true;
       this.onGameOver();
     }
@@ -39,6 +45,7 @@ Game.prototype.clearCanvas = function(){
 Game.prototype.updateCanvas = function(){
 
   this.player.updateXPosition();
+  this.rock.setPositionStart(this.player.updateXPosition());
   this.rock.updatePosition();
 
 }

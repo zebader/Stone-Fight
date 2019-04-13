@@ -47,7 +47,7 @@ function main(){
         game.player.setDirection(1);
       }
       else if(key === 38){
-
+        game.rock.ifStart = true;
         game.rock.setDirection(1);
       }
       });
