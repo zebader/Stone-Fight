@@ -37,12 +37,18 @@ function main(){
     const game = new Game(canvasElement);
     game.startLoop();
 
+    game.setGameOverCallBack(buildGameOverScreen);
+
     document.addEventListener('keydown', function(event){
       const key = event.keyCode;
       if(key === 37){
         game.player.setDirection(-1);}
       else if (key === 39){
         game.player.setDirection(1);
+      }
+      else if(key === 38){
+
+        game.rock.setDirection(1);
       }
       });
     document.addEventListener('keyup', function(event){
@@ -51,13 +57,8 @@ function main(){
         game.player.setDirection(0)
       }
       });
-    document.addEventListener('click', function(event){
-      game.rock.setDirection(1);
-        });
-    
 
-    
-
+  
    // setTimeout(buildGameOverScreen, 3000);
   }
   function buildGameOverScreen(){

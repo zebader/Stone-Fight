@@ -8,12 +8,11 @@ function Game(canvas){
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
 }
-  
 
 Game.prototype.startLoop = function(){
 
   this.player = new Player(this.canvas);
-  this.rock = new Rock(this.canvas);
+  this.rock = new Rock(this.canvas,100,60);
 
   const loop = () => { // por el scope con set timers hay que utilizar binding o arrow functions
 
@@ -23,8 +22,13 @@ Game.prototype.startLoop = function(){
     this.checkCollision();
     if (this.gameOver === false){
       window.requestAnimationFrame(loop);
-    } 
+    }
+    if(this.rock.y > this.canvas.height){
+      this.gameOver = true;
+      this.onGameOver();
+    }
   }
+
   window.requestAnimationFrame(loop);
 
 };
@@ -45,3 +49,8 @@ Game.prototype.drawCanvas = function(){
 Game.prototype.checkCollision = function(){
   
 }
+
+Game.prototype.setGameOverCallBack = function(callback){
+  this.onGameOver = callback;
+} 
+

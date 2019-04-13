@@ -1,23 +1,30 @@
 'use strict';
 
-function Rock(canvas){
+function Rock(canvas,shotSpeed,shotAngle){
   this.canvas = canvas;
   this.size = 20;
-  this.x = canvas.width/4;
-  this.y = canvas.height - this.size;
-  this.ctx = this.canvas.getContext('2d');;
-  this.lives = 3;
+  this.startX = 0;
+  this.startY = canvas.height - this.size;
+  this.x= 0;
+  this.y = 0;
+  this.ctx = this.canvas.getContext('2d');
   this.direction = 0;
-  this.speed = 3;
-  this.gravity = 10;
-  this.deceleration = 0;
-  this.shotSpeed = 0.2;
+  this.gravity = 9.8;
+  this.velocityX = shotSpeed*(Math.cos(shotAngle*Math.PI/180));
+  this.velocityY = shotSpeed*(Math.sin(shotAngle*Math.PI/180));
+  this.time = 0;
 }
 
 Rock.prototype.updatePosition = function(){
-  this.x = this.x + this.direction*this.shotSpeed;
-  this.y = this.y + this.direction - this.gravity;
-  console.log(this.x, this.y)
+
+  console.log('inicial time', this.time)
+  console.log('inicial', this.x, this.y)
+  
+  this.x = this.startX + this.velocityX*this.time;
+  this.y = this.startY - (this.velocityY*this.time - (1/2 * this.gravity*Math.pow(this.time,2)));
+
+  this.time += 1;
+  console.log('triggered',this.x, this.y)
 }
 Rock.prototype.setDirection = function(newDirection){
   this.direction = newDirection;
