@@ -1,6 +1,6 @@
 'use strict';
 
-function Rock(canvas,shotSpeed,shotAngle){
+function Rock(canvas){
   this.canvas = canvas;
   this.size = 20;
   this.x= 0;
@@ -8,11 +8,14 @@ function Rock(canvas,shotSpeed,shotAngle){
   this.ctx = this.canvas.getContext('2d');
   this.direction = 0;
   this.gravity = 0.5;
-  this.velocityX = shotSpeed*(Math.cos(shotAngle*Math.PI/180));
-  this.velocityY = shotSpeed*(Math.sin(shotAngle*Math.PI/180));
+  this.initialVector = [];
+  this.rockSpeed = 0;
+  this.rockAngle = 75;
   this.time = 0;
   this.direction = 0;
   this.ifStart = false;
+  
+  
 }
 
 Rock.prototype.setPositionStart = function(posX){
@@ -21,6 +24,8 @@ Rock.prototype.setPositionStart = function(posX){
 }
 
 Rock.prototype.updatePosition = function(){
+  this.velocityX = this.rockSpeed*(Math.cos(this.rockAngle*Math.PI/180));
+  this.velocityY = this.rockSpeed*(Math.sin(this.rockAngle*Math.PI/180));
 
   this.x = this.startX + (this.velocityX*this.time)*this.direction;
   this.y = this.startY - ((this.velocityY*this.time - (1/2 * this.gravity*Math.pow(this.time,2))))*this.direction;

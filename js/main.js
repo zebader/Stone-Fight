@@ -53,9 +53,10 @@ function main(){
 
   document.addEventListener('keydown', playerMovement);
   document.addEventListener('keyup', playerStopMovement);
-  canvasElement.addEventListener('click', throwRock);
+  canvasElement.addEventListener('mousedown', setThrowValues);
+  canvasElement.addEventListener('mouseup', throwRock);
 
-    function playerMovement(){
+    function playerMovement(event){
       const key = event.keyCode;
       if(key === 37){
         game.player.setDirection(-1);}
@@ -67,18 +68,37 @@ function main(){
       }
     }
 
-    function playerStopMovement(){
+    function playerStopMovement(event){
       const key = event.keyCode;
       if(key !== 37 || key !== 39){
         game.player.setDirection(0)
       }
     }
+    
+    function setThrowValues(event){
 
-    function throwRock(){
       document.removeEventListener('keydown',playerMovement);
       game.player.blockPlayer();
+      canvasElement.removeEventListener('mousedown', setThrowValues);
+ 
+      game.rock.initialVector = [event.offsetX,event.offsetY];
+      console.log(game.rock.initialVector)
+
+    }
+
+    function throwRock(event){
+
       game.rock.ifStart = true;
       game.rock.setDirection(1);
+
+      var finalVector = [Math.abs(event.offsetX - game.rock.initialVector[0]),Math.abs(event.offsetY - game.rock.initialVector[1])];
+
+      //game.rockAngle = 1 / Math.tan((event.pageY - game.rock.initialVector[1])/(event.pageX - game.rock.initialVector[0]));
+      game.rock.rockSpeed = Math.floor((Math.sqrt(Math.pow(finalVector[0],2) + Math.pow(finalVector[1],2)))/10);
+
+      console.log('speed', game.rock.rockSpeed);
+      
+      canvasElement.removeEventListener('mouseup',throwRock);
     }
 
   }

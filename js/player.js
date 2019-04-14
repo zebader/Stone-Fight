@@ -34,7 +34,6 @@ Player.prototype.blockPlayer = function(fixedPos){
   this.direction = 0;
 }
 
-
 Player.prototype.checkCollisionWithWall = function(wall){
   const collisionRight = this.x + this.size > wall.x;
   return collisionRight;

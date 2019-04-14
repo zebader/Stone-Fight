@@ -8,12 +8,10 @@ function Game(canvas){
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
   this.backgroundXspeed = 0;
+
 }
 
 Game.prototype.start = function(){
-
-  var rockSpeed = 25;
-  var rockAngle = 75;
 
   this.backgroundImg = new Image();
   this.backgroundImg.src = "../img/skybg.gif";
@@ -22,8 +20,9 @@ Game.prototype.start = function(){
   this.backgroundImg2.src = "../img/mountainsbg.png";
  
 
+
   this.player = new Player(this.canvas);
-  this.rock = new Rock(this.canvas,rockSpeed,rockAngle);
+  this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
 };
 
@@ -97,6 +96,7 @@ Game.prototype.checkCollision = function(){
   }
   
   if(this.rock.y > this.canvas.height){
+
     this.gameOver = true;
     this.onGameOver();
   }
