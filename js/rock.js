@@ -22,8 +22,8 @@ Rock.prototype.setPositionStart = function(posX){
 
 Rock.prototype.updatePosition = function(){
 
-  console.log('inicial time', this.time)
-  console.log('inicial', this.x, this.y)
+  //console.log('inicial time', this.time)
+  //console.log('inicial', this.x, this.y)
   
   this.x = this.startX + (this.velocityX*this.time)*this.direction;
   this.y = this.startY - ((this.velocityY*this.time - (1/2 * this.gravity*Math.pow(this.time,2))))*this.direction;
@@ -35,7 +35,7 @@ Rock.prototype.updatePosition = function(){
     this.time +=0.6;
   }
 
-  console.log('triggered',this.x, this.y)
+  //console.log('triggered',this.x, this.y)
 }
 Rock.prototype.setDirection = function(newDirection){
   this.direction = newDirection;
@@ -45,12 +45,16 @@ Rock.prototype.setDirection = function(newDirection){
 Rock.prototype.draw = function(){
   this.ctx.fillStyle = 'red';
   this.ctx.fillRect(this.x,this.y,this.size,this.size);
+
+  this.ctx.beginPath();
+  this.ctx.arc(this.x+this.size, this.y + this.size, 5, 0, 2 * Math.PI);
+  this.ctx.stroke();
 }
 
 Rock.prototype.checkCollisionWithWall = function(wall){
-  const collisionRight = this.x + this.size/2 > wall.x;
-  const collisionLeft = this.x - this.size/2 < wall.x + wall.sizeX;
-  const collisionTop = this.y - this.size/2 < wall.y + wall.sizeY;
-
-  return collisionRight && collisionLeft && collisionTop;
+  const collisionRight = this.x + this.size > wall.x && this.x + this.size < wall.x + wall.sizeX && this.y + this.size > wall.y ;
+  //const collisionLeft = this.x - this.size/2 < wall.x + wall.sizeX;
+  //const collisionTop = this.y - this.size/2 < wall.y + wall.sizeY;
+  console.log('colls', this.x + this.size > wall.x , this.x + this.size < wall.x + wall.sizeX , this.y + this.size > wall.y);
+  return collisionRight /*&& collisionLeft && collisionTop*/;
 }
