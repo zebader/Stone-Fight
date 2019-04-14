@@ -75,8 +75,8 @@ function main(){
     }
 
     function throwRock(){
-      document.removeEventListener('keydown',playerMovement)
-      game.player.blockPlayer(game.player.updateXPosition(),true);
+      document.removeEventListener('keydown',playerMovement);
+      game.player.blockPlayer();
       game.rock.ifStart = true;
       game.rock.setDirection(1);
     }

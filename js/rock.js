@@ -22,9 +22,6 @@ Rock.prototype.setPositionStart = function(posX){
 
 Rock.prototype.updatePosition = function(){
 
-  //console.log('inicial time', this.time)
-  //console.log('inicial', this.x, this.y)
-  
   this.x = this.startX + (this.velocityX*this.time)*this.direction;
   this.y = this.startY - ((this.velocityY*this.time - (1/2 * this.gravity*Math.pow(this.time,2))))*this.direction;
 
@@ -35,11 +32,9 @@ Rock.prototype.updatePosition = function(){
     this.time +=0.6;
   }
 
-  //console.log('triggered',this.x, this.y)
 }
 Rock.prototype.setDirection = function(newDirection){
   this.direction = newDirection;
-  // return this.direction;
 }
 
 Rock.prototype.draw = function(){

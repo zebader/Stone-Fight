@@ -73,8 +73,15 @@ Game.prototype.drawBackground = function(){
   }
   this.backgroundXspeed -= 0.1;
 
+  /*var backgroundPattern = this.ctx.createPattern(this.backgroundImg2, 'repeat-x');
+  this.ctx.fillStyle = backgroundPattern;
+  this.ctx.fillRect(0,this.canvas.height - this.backgroundImg2.height ,this.canvas.width,this.backgroundImg2.height);
+
+  console.log(this.canvas.height - this.backgroundImg2.height)*/
+
   this.ctx.drawImage(this.backgroundImg2,0,this.canvas.height - this.backgroundImg2.height);
   this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width,this.canvas.height - this.backgroundImg2.height);
+  this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width*2,this.canvas.height - this.backgroundImg2.height);
 
 }
 
@@ -84,11 +91,15 @@ Game.prototype.checkCollision = function(){
     this.gameOver = true;
     this.onGameOver();
   }
+  if (this.player.checkCollisionWithWall(this.wall)){
+
+    this.player.x = this.wall.x - this.player.size;
+  }
+  
   if(this.rock.y > this.canvas.height){
     this.gameOver = true;
     this.onGameOver();
   }
-  
   
 }
 
