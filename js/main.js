@@ -45,11 +45,12 @@ function main(){
     canvasElement.setAttribute('height',gameHeight);
 
     const game = new Game(canvasElement);
+    game.start();
     game.startLoop();
     game.setGameOverCallBack(buildGameOverScreen);
 
   //Event listeners ----------
-  
+
   document.addEventListener('keydown', playerMovement);
   document.addEventListener('keyup', playerStopMovement);
   canvasElement.addEventListener('click', throwRock);

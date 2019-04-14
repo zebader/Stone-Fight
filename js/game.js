@@ -9,20 +9,20 @@ function Game(canvas){
   this.gameOver = false;
 }
 
-var rockSpeed = 25;
-var rockAngle = 75;
+Game.prototype.start = function(){
 
-Game.prototype.startLoop = function(){
-  
+  var rockSpeed = 25;
+  var rockAngle = 75;
+  this.backgroundImg = new Image();
+  this.backgroundImg.src = "../img/skybg.gif";
 
   this.player = new Player(this.canvas);
-  
   this.rock = new Rock(this.canvas,rockSpeed,rockAngle);
-
   this.wall = new Wall(this.canvas);
+};
 
-  
-  
+Game.prototype.startLoop = function(){
+    
   const loop = () => { // por el scope con set timers hay que utilizar binding o arrow functions
 
     this.clearCanvas();
@@ -32,7 +32,6 @@ Game.prototype.startLoop = function(){
     if (this.gameOver === false){
       window.requestAnimationFrame(loop);
     }
-
   }
 
   window.requestAnimationFrame(loop);
@@ -40,6 +39,7 @@ Game.prototype.startLoop = function(){
 };
 
 Game.prototype.clearCanvas = function(){
+
   this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
 }
 Game.prototype.updateCanvas = function(){
@@ -50,6 +50,7 @@ Game.prototype.updateCanvas = function(){
 
 }
 Game.prototype.drawCanvas = function(){
+  this.ctx.drawImage(this.backgroundImg,0, 0,this.canvas.width,this.canvas.height);
   this.player.draw();
   this.rock.draw();
   this.wall.draw();
