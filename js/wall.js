@@ -12,7 +12,5 @@ function Wall(canvas){
 }
 
 Wall.prototype.draw = function(){
-
   this.ctx.drawImage(this.wallImg,this.x ,this.y,this.sizeX,this.sizeY );
-
 }

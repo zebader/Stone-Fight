@@ -8,28 +8,22 @@ function Game(canvas){
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
   this.backgroundXspeed = 0;
-
 }
 
 Game.prototype.start = function(){
-
   this.backgroundImg = new Image();
   this.backgroundImg.src = "../img/skybg.gif";
 
   this.backgroundImg2 = new Image();
   this.backgroundImg2.src = "../img/mountainsbg.png";
  
-
-
   this.player = new Player(this.canvas);
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
 };
 
 Game.prototype.startLoop = function(){
-    
-  const loop = () => { // por el scope con set timers hay que utilizar binding o arrow functions
-
+  const loop = () => {
     this.clearCanvas();
     this.updateCanvas();
     this.drawCanvas();
@@ -40,29 +34,27 @@ Game.prototype.startLoop = function(){
   }
 
   window.requestAnimationFrame(loop);
-
 };
 
 Game.prototype.clearCanvas = function(){
-
   this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
 }
-Game.prototype.updateCanvas = function(){
 
+Game.prototype.updateCanvas = function(){
   this.player.updateXPosition();
   this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2);
   this.rock.updatePosition();
-
 }
-Game.prototype.drawCanvas = function(){
 
+Game.prototype.drawCanvas = function(){
   this.drawBackground();
   this.player.draw();
   this.rock.draw();
+  this.rock.drawHandler();
   this.wall.draw();
 }
-Game.prototype.drawBackground = function(){
 
+Game.prototype.drawBackground = function(){
   this.ctx.drawImage(this.backgroundImg,this.backgroundXspeed ,0);
   this.ctx.drawImage(this.backgroundImg, this.backgroundImg.width - Math.abs(this.backgroundXspeed),0);
   this.ctx.drawImage(this.backgroundImg, this.backgroundImg.width*2 - Math.abs(this.backgroundXspeed),0);
@@ -72,20 +64,12 @@ Game.prototype.drawBackground = function(){
   }
   this.backgroundXspeed -= 0.1;
 
-  /*var backgroundPattern = this.ctx.createPattern(this.backgroundImg2, 'repeat-x');
-  this.ctx.fillStyle = backgroundPattern;
-  this.ctx.fillRect(0,this.canvas.height - this.backgroundImg2.height ,this.canvas.width,this.backgroundImg2.height);
-
-  console.log(this.canvas.height - this.backgroundImg2.height)*/
-
   this.ctx.drawImage(this.backgroundImg2,0,this.canvas.height - this.backgroundImg2.height);
   this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width,this.canvas.height - this.backgroundImg2.height);
   this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width*2,this.canvas.height - this.backgroundImg2.height);
-
 }
 
 Game.prototype.checkCollision = function(){
-
   if (this.rock.checkCollisionWithWall(this.wall)){
     this.gameOver = true;
     this.onGameOver();
@@ -100,7 +84,6 @@ Game.prototype.checkCollision = function(){
     this.gameOver = true;
     this.onGameOver();
   }
-  
 }
 
 Game.prototype.setGameOverCallBack = function(callback){
