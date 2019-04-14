@@ -45,16 +45,11 @@ Rock.prototype.setDirection = function(newDirection){
 Rock.prototype.draw = function(){
   this.ctx.fillStyle = 'red';
   this.ctx.fillRect(this.x,this.y,this.size,this.size);
-
-  this.ctx.beginPath();
-  this.ctx.arc(this.x+this.size, this.y + this.size, 5, 0, 2 * Math.PI);
-  this.ctx.stroke();
 }
 
 Rock.prototype.checkCollisionWithWall = function(wall){
   const collisionRight = this.x + this.size > wall.x && this.x + this.size < wall.x + wall.sizeX && this.y + this.size > wall.y ;
-  //const collisionLeft = this.x - this.size/2 < wall.x + wall.sizeX;
-  //const collisionTop = this.y - this.size/2 < wall.y + wall.sizeY;
-  console.log('colls', this.x + this.size > wall.x , this.x + this.size < wall.x + wall.sizeX , this.y + this.size > wall.y);
+  //const collisionLeft = ;
+  //const collisionTop = ;
   return collisionRight /*&& collisionLeft && collisionTop*/;
 }

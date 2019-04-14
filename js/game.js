@@ -7,14 +7,20 @@ function Game(canvas){
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
+  this.backgroundXspeed = 0;
 }
 
 Game.prototype.start = function(){
 
   var rockSpeed = 25;
   var rockAngle = 75;
+
   this.backgroundImg = new Image();
   this.backgroundImg.src = "../img/skybg.gif";
+
+  this.backgroundImg2 = new Image();
+  this.backgroundImg2.src = "../img/mountainsbg.png";
+ 
 
   this.player = new Player(this.canvas);
   this.rock = new Rock(this.canvas,rockSpeed,rockAngle);
@@ -50,11 +56,28 @@ Game.prototype.updateCanvas = function(){
 
 }
 Game.prototype.drawCanvas = function(){
-  this.ctx.drawImage(this.backgroundImg,0, 0,this.canvas.width,this.canvas.height);
+
+  this.drawBackground();
   this.player.draw();
   this.rock.draw();
   this.wall.draw();
 }
+Game.prototype.drawBackground = function(){
+
+  this.ctx.drawImage(this.backgroundImg,this.backgroundXspeed ,0);
+  this.ctx.drawImage(this.backgroundImg, this.backgroundImg.width - Math.abs(this.backgroundXspeed),0);
+  this.ctx.drawImage(this.backgroundImg, this.backgroundImg.width*2 - Math.abs(this.backgroundXspeed),0);
+
+  if (Math.abs(this.backgroundXspeed) > this.backgroundImg.width) {
+    this.backgroundXspeed = 0;
+  }
+  this.backgroundXspeed -= 0.1;
+
+  this.ctx.drawImage(this.backgroundImg2,0,this.canvas.height - this.backgroundImg2.height);
+  this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width,this.canvas.height - this.backgroundImg2.height);
+
+}
+
 Game.prototype.checkCollision = function(){
 
   if (this.rock.checkCollisionWithWall(this.wall)){

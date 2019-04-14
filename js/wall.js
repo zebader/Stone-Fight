@@ -13,7 +13,4 @@ Wall.prototype.draw = function(){
   this.ctx.fillStyle = 'black';
   this.ctx.fillRect(this.x,this.y,this.sizeX,this.sizeY);
 
-  this.ctx.beginPath();
-  this.ctx.arc(this.x, this.y, 50, 0, 2 * Math.PI);
-  this.ctx.stroke();
 }
