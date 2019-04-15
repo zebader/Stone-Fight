@@ -40,6 +40,6 @@ Player.prototype.blockPlayer = function(fixedPos){
 Player.prototype.checkCollisionWithWall = function(wall){
   const collisionRight = this.x + this.size > wall.x;
   const collisionLeft = this.x < wall.x + wall.sizeX;
-  console.log (collisionRight && collisionLeft)
+  
   return collisionRight && collisionLeft;
 }

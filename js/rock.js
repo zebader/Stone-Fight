@@ -30,7 +30,7 @@ Rock.prototype.resetValues = function(posX){
 
 Rock.prototype.setPositionStart = function(posX){
   this.startX = posX;
-  this.startY = this.canvas.height-100;
+  this.startY = this.canvas.height-150;
 }
 
 Rock.prototype.setThrowRockInitValues = function(){
@@ -87,10 +87,13 @@ Rock.prototype.drawHandler = function(){
   this.ctx.stroke();
 }
 
-
 Rock.prototype.checkCollisionWithWall = function(wall){
-  const collisionRight = this.x + this.size > wall.x && this.x + this.size < wall.x + wall.sizeX && this.y + this.size > wall.y ;
-  //const collisionLeft = ;
-  //const collisionTop = ;
-  return collisionRight /*&& collisionLeft && collisionTop*/;
+  const collision = this.x + this.size > wall.x && this.x + this.size < wall.x + wall.sizeX && this.y + this.size > wall.y ;
+  return collision;
+}
+
+Rock.prototype.checkCollisionWithPlayer = function(player){
+  const collision = this.x + this.size > player.x && this.x + this.size < player.x + player.size && this.y + this.size > player.y ;
+  console.log(collision)
+  return collision;
 }

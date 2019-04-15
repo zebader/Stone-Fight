@@ -100,11 +100,19 @@ Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithWall(this.wall)){
     this.switchPlayerTurn();
   }
+  if (this.rock.checkCollisionWithPlayer(this.player2)){
+    alert('You hit player2!')
+    this.switchPlayerTurn();
+  }
+  if (this.rock.checkCollisionWithPlayer(this.player)){
+    alert('You hit player1!')
+    this.switchPlayerTurn();
+  }
   if (this.player.checkCollisionWithWall(this.wall)){
     this.player.x = this.wall.x - this.player.size;
   }
   if (this.player2.checkCollisionWithWall(this.wall)){
-    this.player2.x = this.wall.x + this.player2.size;
+    this.player2.x = this.wall.x + this.wall.sizeX;
   }
   if(this.rock.y > this.canvas.height ){
     this.switchPlayerTurn();
