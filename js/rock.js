@@ -15,6 +15,18 @@ function Rock(canvas){
   this.direction = 0;
   this.ifStart = false;
 }
+Rock.prototype.resetValues = function(posX){
+  this.size = 20;
+  this.x = posX;
+  this.y = 100;
+  this.direction = 0;
+  this.initialVector = [];
+  this.rockSpeed = 0;
+  this.rockAngle = 0;
+  this.time = 0;
+  this.direction = 0;
+  this.ifStart = false;
+}
 
 Rock.prototype.setPositionStart = function(posX){
   this.startX = posX;

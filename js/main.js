@@ -58,13 +58,28 @@ function main(){
 
     function playerMovement(event){
       const key = event.keyCode;
-      if(key === 37){
-        game.player.setDirection(-1);}
-      else if (key === 39){
-        game.player.setDirection(1);
-      }
-      else if(key === 38){
 
+    
+
+      if(game.turn%2 !== 0){
+        if(key === 37){
+          game.player.setDirection(-1);
+          game.player2.setDirection(0);
+        }
+        else if (key === 39){
+          game.player.setDirection(1);
+          game.player2.setDirection(0);
+        }
+      }
+      else {
+        if(key === 37){
+          game.player.setDirection(0);
+          game.player2.setDirection(-1);
+        }
+        else if (key === 39){
+          game.player.setDirection(0);
+          game.player2.setDirection(1);
+        }
       }
     }
 
@@ -72,6 +87,7 @@ function main(){
       const key = event.keyCode;
       if(key !== 37 || key !== 39){
         game.player.setDirection(0)
+        game.player2.setDirection(0)
       }
     }
     

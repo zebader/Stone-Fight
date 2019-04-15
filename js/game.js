@@ -8,6 +8,7 @@ function Game(canvas){
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
   this.backgroundXspeed = 0;
+  this.turn = 1;
 }
 
 Game.prototype.start = function(){
@@ -73,6 +74,13 @@ Game.prototype.drawBackground = function(){
   this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width*2,this.canvas.height - this.backgroundImg2.height);
 }
 
+Game.prototype.switchPlayerTurn = function(){
+
+  this.rock.resetValues(this.player2.updateXPosition());
+  this.turn ++;
+  console.log(this.player2.updateXPosition(), this.turn)
+}
+
 Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithWall(this.wall)){
     this.gameOver = true;
@@ -83,15 +91,15 @@ Game.prototype.checkCollision = function(){
     this.player.x = this.wall.x - this.player.size;
   }
   
-  if(this.rock.y > this.canvas.height){
-
-    this.gameOver = true;
-    this.onGameOver();
+  if(this.rock.y > this.canvas.height ){
+    this.switchPlayerTurn();
+    console.log(this.turn)
   }
 }
 
 Game.prototype.setGameOverCallBack = function(callback){
   this.onGameOver = callback;
-} 
+}
+
 
 
