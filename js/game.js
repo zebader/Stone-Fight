@@ -94,3 +94,4 @@ Game.prototype.setGameOverCallBack = function(callback){
   this.onGameOver = callback;
 } 
 
+

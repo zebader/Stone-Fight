@@ -81,7 +81,7 @@ function main(){
       game.player.blockPlayer();
       canvasElement.removeEventListener('mousedown', setThrowValues);
  
-      game.rock.initialVector = [event.offsetX,event.offsetY];
+      game.rock.setThrowRockInitValues();
 
     }
 
@@ -89,20 +89,7 @@ function main(){
 
       game.rock.ifStart = true;
       game.rock.setDirection(1);
-
-
-      // SPEED ===============================
-      var finalVector = [Math.abs(event.offsetX - game.rock.initialVector[0]),Math.abs(event.offsetY - game.rock.initialVector[1])];
-      game.rock.rockSpeed = Math.floor((Math.sqrt(Math.pow(finalVector[0],2) + Math.pow(finalVector[1],2)))/10);
-      // ANGLE ================================
-      var x1 = event.offsetX;
-      var x2 = -event.offsetY;
-
-      var y1 = game.rock.initialVector[0];
-      var y2 = -game.rock.initialVector[1];
-
-      game.rock.rockAngle = Math.atan2(y2 - x2, y1 - x1) * 180 / Math.PI;
-      //=============================
+      game.rock.setThrowRockValues()
 
       canvasElement.removeEventListener('mouseup',throwRock);
     }

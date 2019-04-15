@@ -21,6 +21,25 @@ Rock.prototype.setPositionStart = function(posX){
   this.startY = this.canvas.height-100;
 }
 
+Rock.prototype.setThrowRockInitValues = function(){
+  this.initialVector = [event.offsetX,event.offsetY];
+}
+
+Rock.prototype.setThrowRockValues = function(){
+  // SPEED ===============================
+  var finalVector = [Math.abs(event.offsetX - this.initialVector[0]),Math.abs(event.offsetY - this.initialVector[1])];
+  this.rockSpeed = Math.floor((Math.sqrt(Math.pow(finalVector[0],2) + Math.pow(finalVector[1],2)))/10);
+  // ANGLE ================================
+  var x1 = event.offsetX;
+  var x2 = -event.offsetY;
+
+  var y1 = this.initialVector[0];
+  var y2 = -this.initialVector[1];
+
+  this.rockAngle = Math.atan2(y2 - x2, y1 - x1) * 180 / Math.PI;
+  //=============================
+}
+
 Rock.prototype.updatePosition = function(){
   this.velocityX = this.rockSpeed*(Math.cos(this.rockAngle*Math.PI/180));
   this.velocityY = this.rockSpeed*(Math.sin(this.rockAngle*Math.PI/180));
