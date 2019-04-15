@@ -16,6 +16,9 @@ Player.prototype.updateXPosition = function(){
   if(this.x < 0){
     this.x = 0
   }
+  if(this.x >= this.canvas.width - this.size){
+    this.x = this.canvas.width - this.size;
+  }
   return this.x
 }
 Player.prototype.setDirection = function(newDirection){

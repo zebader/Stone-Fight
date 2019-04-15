@@ -7,6 +7,7 @@ function Wall(canvas){
   this.x = canvas.width/2 - this.sizeX/2;
   this.y = canvas.height-this.sizeY;
   this.ctx = this.canvas.getContext('2d');
+  
   this.wallImg = new Image();
   this.wallImg.src = "../img/wall.png";
 }

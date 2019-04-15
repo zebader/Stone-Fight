@@ -49,27 +49,6 @@ function main(){
     game.startLoop();
     game.setGameOverCallBack(buildGameOverScreen);
 
-  //Event listeners ----------
-
-  document.addEventListener('keyup', playerStopMovement);
-  document.addEventListener('mouseup', throwRock);
-
-    function playerStopMovement(event){
-      const key = event.keyCode;
-      if(key !== 37 || key !== 39){
-        game.player.setDirection(0)
-        game.player2.setDirection(0)
-      }
-    }
-
-    function throwRock(event){
-
-      game.rock.ifStart = true;
-      game.rock.setDirection(1);
-      game.rock.setThrowRockValues()
-
-    }
-
   }
   //===========GAMEOVER SCREEN
   function buildGameOverScreen(){

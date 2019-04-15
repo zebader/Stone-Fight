@@ -23,12 +23,17 @@ Game.prototype.start = function(){
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
 
-  this.newMovement = this.playerMovement.bind(this)
+  //Event listeners ----------
 
-  document.addEventListener('keydown', this.newMovement)
-  document.addEventListener('mousedown', (e) => {
-    this.setThrowValues.call(this, e)
-  });
+  this.newMovement = this.playerMovement.bind(this);
+  this.stopMovement = this.playerStopMovement.bind(this);
+  this.newInitialPos = this.setThrowValues.bind(this);
+  this.newFinalPos = this.throwRock.bind(this);
+
+  document.addEventListener('keydown', this.newMovement);
+  document.addEventListener('mousedown',  this.newInitialPos);
+  document.addEventListener('mouseup', this.newFinalPos);
+  document.addEventListener('keyup', this.stopMovement);
 };
 
 Game.prototype.startLoop = function(){
@@ -92,7 +97,7 @@ Game.prototype.switchPlayerTurn = function(){
   this.rock.resetValues(this.player2.x);
   this.rock.x = 1000;
   this.turn ++;
-  document.addEventListener('keydown', this.newMovement)
+  document.addEventListener('keydown', this.newMovement);
 }
 
 Game.prototype.checkCollision = function(){
@@ -106,7 +111,6 @@ Game.prototype.checkCollision = function(){
   }
   
   if(this.rock.y > this.canvas.height ){
-  
     this.switchPlayerTurn();
   }
 }
@@ -114,6 +118,8 @@ Game.prototype.checkCollision = function(){
 Game.prototype.setGameOverCallBack = function(callback){
   this.onGameOver = callback;
 }
+
+// Events methods ===========================================
 
 Game.prototype.playerMovement = function(event){
 
@@ -141,11 +147,24 @@ Game.prototype.playerMovement = function(event){
   }
 }
 
-Game.prototype.setThrowValues = function(event){
+Game.prototype.playerStopMovement = function(event){
+  const key = event.keyCode;
+  if(key !== 37 || key !== 39){
+    this.player.setDirection(0)
+    this.player2.setDirection(0)
+  }
+}
 
+Game.prototype.setThrowValues = function(event){
   this.player.blockPlayer();
   document.removeEventListener('keydown', this.newMovement)
-
   this.rock.setThrowRockInitValues();
+}
+
+Game.prototype.throwRock = function(event){
+  this.rock.ifStart = true;
+  this.rock.setDirection(1);
+  this.rock.setThrowRockValues();
+  
 }
 
