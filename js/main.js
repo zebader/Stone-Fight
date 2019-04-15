@@ -51,16 +51,13 @@ function main(){
 
   //Event listeners ----------
 
-  document.addEventListener('keydown', playerMovement);
   document.addEventListener('keyup', playerStopMovement);
-  canvasElement.addEventListener('mousedown', setThrowValues);
-  canvasElement.addEventListener('mouseup', throwRock);
+  document.addEventListener('mousedown', setThrowValues);
+  document.addEventListener('mouseup', throwRock);
 
-    function playerMovement(event){
+/*     function playerMovement(event){
       const key = event.keyCode;
-
-    
-
+  
       if(game.turn%2 !== 0){
         if(key === 37){
           game.player.setDirection(-1);
@@ -81,7 +78,7 @@ function main(){
           game.player2.setDirection(1);
         }
       }
-    }
+    } */
 
     function playerStopMovement(event){
       const key = event.keyCode;
@@ -92,10 +89,9 @@ function main(){
     }
     
     function setThrowValues(event){
-
-      document.removeEventListener('keydown',playerMovement);
+      document.removeEventListener('keydown', game.playerMovement);
       game.player.blockPlayer();
-      canvasElement.removeEventListener('mousedown', setThrowValues);
+      //canvasElement.removeEventListener('mousedown', setThrowValues);
  
       game.rock.setThrowRockInitValues();
 
@@ -107,7 +103,7 @@ function main(){
       game.rock.setDirection(1);
       game.rock.setThrowRockValues()
 
-      canvasElement.removeEventListener('mouseup',throwRock);
+     // canvasElement.removeEventListener('mouseup',throwRock);
     }
 
   }

@@ -22,9 +22,13 @@ Game.prototype.start = function(){
   this.player2 = new Player(this.canvas,4*this.canvas.width/5);
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
+  document.addEventListener('keydown', (e) => {
+    this.playerMovement.call(this, e)
+  });
 };
 
 Game.prototype.startLoop = function(){
+  
   const loop = () => {
     this.clearCanvas();
     this.updateCanvas();
@@ -45,7 +49,12 @@ Game.prototype.clearCanvas = function(){
 Game.prototype.updateCanvas = function(){
   this.player.updateXPosition();
   this.player2.updateXPosition();
-  this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2);
+  if (this.turn % 2 !== 0) {
+    this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2);
+  } else {
+    this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2);
+  }
+
   this.rock.updatePosition();
 }
 
@@ -75,10 +84,15 @@ Game.prototype.drawBackground = function(){
 }
 
 Game.prototype.switchPlayerTurn = function(){
-
-  this.rock.resetValues(this.player2.updateXPosition());
+  this.rock = new Rock(this.canvas);
+  this.rock.resetValues(this.player2.x);
+  this.rock.x = 1000;
   this.turn ++;
-  console.log(this.player2.updateXPosition(), this.turn)
+  document.addEventListener('keydown', (e) => {
+    this.playerMovement.call(this, e)
+  });
+
+  //console.log(this.player2.updateXPosition(), this.turn)
 }
 
 Game.prototype.checkCollision = function(){
@@ -92,8 +106,8 @@ Game.prototype.checkCollision = function(){
   }
   
   if(this.rock.y > this.canvas.height ){
+  
     this.switchPlayerTurn();
-    console.log(this.turn)
   }
 }
 
@@ -101,5 +115,33 @@ Game.prototype.setGameOverCallBack = function(callback){
   this.onGameOver = callback;
 }
 
+
+Game.prototype.playerMovement = function(event){
+
+  console.log('this', this);
+  
+  const key = event.keyCode;
+
+  if(this.turn%2 !== 0){
+    if(key === 37){
+      this.player.setDirection(-1);
+      this.player2.setDirection(0);
+    }
+    else if (key === 39){
+      this.player.setDirection(1);
+      this.player2.setDirection(0);
+    }
+  }
+  else {
+    if(key === 37){
+      this.player.setDirection(0);
+      this.player2.setDirection(-1);
+    }
+    else if (key === 39){
+      this.player.setDirection(0);
+      this.player2.setDirection(1);
+    }
+  }
+}
 
 

@@ -3,7 +3,7 @@
 function Rock(canvas){
   this.canvas = canvas;
   this.size = 20;
-  this.x= 0;
+  this.x = 0;
   this.y = 0;
   this.ctx = this.canvas.getContext('2d');
   this.direction = 0;
