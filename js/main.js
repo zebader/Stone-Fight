@@ -101,7 +101,6 @@ function main(){
       var y1 = game.rock.initialVector[0];
       var y2 = -game.rock.initialVector[1];
 
-      console.log('initial', x1,x2, 'final',y1,y2)
       game.rock.rockAngle = Math.atan2(y2 - x2, y1 - x1) * 180 / Math.PI;
       //=============================
 

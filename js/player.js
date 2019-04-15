@@ -1,9 +1,9 @@
 'use strict';
 
-function Player(canvas){
+function Player(canvas,posX){
   this.canvas = canvas;
   this.size = 100;
-  this.x = canvas.width/5;
+  this.x = posX;
   this.y = canvas.height - this.size;
   this.ctx = this.canvas.getContext('2d');;
   this.lives = 3;
@@ -22,8 +22,8 @@ Player.prototype.setDirection = function(newDirection){
   this.direction = newDirection;
 }
 
-Player.prototype.draw = function(){
-  this.ctx.fillStyle = 'purple';
+Player.prototype.draw = function(color){
+  this.ctx.fillStyle = color;
   this.ctx.fillRect(this.x,this.y,this.size,this.size);
 }
 Player.prototype.setLives = function(){

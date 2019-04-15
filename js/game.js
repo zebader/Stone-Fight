@@ -17,7 +17,8 @@ Game.prototype.start = function(){
   this.backgroundImg2 = new Image();
   this.backgroundImg2.src = "../img/mountainsbg.png";
  
-  this.player = new Player(this.canvas);
+  this.player = new Player(this.canvas,this.canvas.width/5);
+  this.player2 = new Player(this.canvas,4*this.canvas.width/5);
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
 };
@@ -42,13 +43,16 @@ Game.prototype.clearCanvas = function(){
 
 Game.prototype.updateCanvas = function(){
   this.player.updateXPosition();
+  this.player2.updateXPosition();
   this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2);
   this.rock.updatePosition();
 }
 
 Game.prototype.drawCanvas = function(){
+
   this.drawBackground();
-  this.player.draw();
+  this.player.draw('purple');
+  this.player2.draw('yellow');
   this.rock.draw();
   this.rock.drawHandler();
   this.wall.draw();

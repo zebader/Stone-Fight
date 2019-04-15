@@ -22,7 +22,6 @@ Rock.prototype.setPositionStart = function(posX){
 }
 
 Rock.prototype.updatePosition = function(){
-  console.log(this.rockAngle, this.rockSpeed)
   this.velocityX = this.rockSpeed*(Math.cos(this.rockAngle*Math.PI/180));
   this.velocityY = this.rockSpeed*(Math.sin(this.rockAngle*Math.PI/180));
 
