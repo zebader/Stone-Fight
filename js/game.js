@@ -37,7 +37,6 @@ Game.prototype.start = function(){
 };
 
 Game.prototype.startLoop = function(){
-  
   const loop = () => {
     this.clearCanvas();
     this.updateCanvas();
@@ -47,7 +46,6 @@ Game.prototype.startLoop = function(){
       window.requestAnimationFrame(loop);
     }
   }
-
   window.requestAnimationFrame(loop);
 };
 
@@ -63,12 +61,10 @@ Game.prototype.updateCanvas = function(){
   } else {
     this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2);
   }
-
   this.rock.updatePosition();
 }
 
 Game.prototype.drawCanvas = function(){
-
   this.drawBackground();
   this.player.draw('purple');
   this.player2.draw('yellow');
@@ -102,14 +98,14 @@ Game.prototype.switchPlayerTurn = function(){
 
 Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithWall(this.wall)){
-    this.gameOver = true;
-    this.onGameOver();
+    this.switchPlayerTurn();
   }
   if (this.player.checkCollisionWithWall(this.wall)){
-
     this.player.x = this.wall.x - this.player.size;
   }
-  
+  if (this.player2.checkCollisionWithWall(this.wall)){
+    this.player2.x = this.wall.x + this.player2.size;
+  }
   if(this.rock.y > this.canvas.height ){
     this.switchPlayerTurn();
   }
@@ -122,7 +118,6 @@ Game.prototype.setGameOverCallBack = function(callback){
 // Events methods ===========================================
 
 Game.prototype.playerMovement = function(event){
-
   const key = event.keyCode;
 
   if(this.turn%2 !== 0){
