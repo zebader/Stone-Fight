@@ -77,6 +77,7 @@ Rock.prototype.draw = function(){
 }
 
 Rock.prototype.drawHandler = function(){
+  
   this.ctx.beginPath();
   this.ctx.arc(this.initialVector[0],this.initialVector[1], this.rockSpeed * 5, 0, 2 * Math.PI, false);
   this.ctx.fillStyle = 'green';

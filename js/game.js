@@ -22,8 +22,12 @@ Game.prototype.start = function(){
   this.player2 = new Player(this.canvas,4*this.canvas.width/5);
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
-  document.addEventListener('keydown', (e) => {
-    this.playerMovement.call(this, e)
+
+  this.newMovement = this.playerMovement.bind(this)
+
+  document.addEventListener('keydown', this.newMovement)
+  document.addEventListener('mousedown', (e) => {
+    this.setThrowValues.call(this, e)
   });
 };
 
@@ -88,11 +92,7 @@ Game.prototype.switchPlayerTurn = function(){
   this.rock.resetValues(this.player2.x);
   this.rock.x = 1000;
   this.turn ++;
-  document.addEventListener('keydown', (e) => {
-    this.playerMovement.call(this, e)
-  });
-
-  //console.log(this.player2.updateXPosition(), this.turn)
+  document.addEventListener('keydown', this.newMovement)
 }
 
 Game.prototype.checkCollision = function(){
@@ -115,11 +115,8 @@ Game.prototype.setGameOverCallBack = function(callback){
   this.onGameOver = callback;
 }
 
-
 Game.prototype.playerMovement = function(event){
 
-  console.log('this', this);
-  
   const key = event.keyCode;
 
   if(this.turn%2 !== 0){
@@ -144,4 +141,11 @@ Game.prototype.playerMovement = function(event){
   }
 }
 
+Game.prototype.setThrowValues = function(event){
+
+  this.player.blockPlayer();
+  document.removeEventListener('keydown', this.newMovement)
+
+  this.rock.setThrowRockInitValues();
+}
 
