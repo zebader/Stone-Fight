@@ -9,7 +9,10 @@ function Game(canvas){
   this.gameOver = false;
   this.backgroundXspeed = 0;
   this.turn = 1;
+  this.finalVectorPos = null;
 }
+
+//Add initial elements and events ----------
 
 Game.prototype.start = function(){
   this.backgroundImg = new Image();
@@ -23,18 +26,21 @@ Game.prototype.start = function(){
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
 
-  //Event listeners ----------
+//Event listeners ----------
 
-  this.newMovement = this.playerMovement.bind(this);
+  this.newMovement= this.playerMovement.bind(this);
   this.stopMovement = this.playerStopMovement.bind(this);
   this.newInitialPos = this.setThrowValues.bind(this);
   this.newFinalPos = this.throwRock.bind(this);
+  this.drawHandlerLine = this.setCursorPosition.bind(this);
 
   document.addEventListener('keydown', this.newMovement);
   document.addEventListener('mousedown',  this.newInitialPos);
   document.addEventListener('mouseup', this.newFinalPos);
   document.addEventListener('keyup', this.stopMovement);
 };
+
+//Star game loop ----------
 
 Game.prototype.startLoop = function(){
   const loop = () => {
@@ -48,6 +54,8 @@ Game.prototype.startLoop = function(){
   }
   window.requestAnimationFrame(loop);
 };
+
+//Game methods ----------
 
 Game.prototype.clearCanvas = function(){
   this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
@@ -69,8 +77,10 @@ Game.prototype.drawCanvas = function(){
   this.player.draw('purple');
   this.player2.draw('yellow');
   this.rock.draw();
-  this.rock.drawHandler();
   this.wall.draw();
+
+  if(this.finalVectorPos){
+    this.drawPowerLine();}
 }
 
 Game.prototype.drawBackground = function(){
@@ -161,6 +171,9 @@ Game.prototype.playerStopMovement = function(event){
 }
 
 Game.prototype.setThrowValues = function(event){
+
+  document.addEventListener('mousemove', this.drawHandlerLine);
+
   this.player.blockPlayer();
   document.removeEventListener('keydown', this.newMovement)
   this.rock.setThrowRockInitValues();
@@ -169,9 +182,30 @@ Game.prototype.setThrowValues = function(event){
 Game.prototype.throwRock = function(event){
   document.removeEventListener('mousedown',  this.newInitialPos);
   document.removeEventListener('mouseup', this.newFinalPos);
+  document.removeEventListener('mousemove', this.drawHandlerLine);
   this.rock.ifStart = true;
   this.rock.setDirection(1);
   this.rock.setThrowRockValues();
   
 }
 
+Game.prototype.setCursorPosition = function(event){
+  this.rock.initialVector
+  this.finalVectorPos = [event.offsetX,event.offsetY];
+}
+
+Game.prototype.drawPowerLine = function(){
+
+  this.ctx.beginPath();
+  this.ctx.strokeStyle= 'yellow';
+  this.ctx.lineWidth = 4;
+  this.ctx.moveTo(this.rock.initialVector[0], this.rock.initialVector[1]);
+  this.ctx.lineTo(this.finalVectorPos[0], this.finalVectorPos[1]);
+  this.ctx.stroke();
+
+/*   this.clearCanvas();
+  this.ctx.beginPath();
+  this.ctx.moveTo(this.rock.initialVector[0], this.rock.initialVector[1]);
+  this.ctx.lineTo(event.offsetX, event.offsetY);
+  this.ctx.stroke(); */
+}

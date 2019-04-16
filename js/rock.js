@@ -30,7 +30,7 @@ Rock.prototype.resetValues = function(posX){
 
 Rock.prototype.setPositionStart = function(posX){
   this.startX = posX;
-  this.startY = this.canvas.height-150;
+  this.startY = this.canvas.height-120;
 }
 
 Rock.prototype.setThrowRockInitValues = function(){
@@ -76,16 +76,6 @@ Rock.prototype.draw = function(){
   this.ctx.fillRect(this.x,this.y,this.size,this.size);
 }
 
-Rock.prototype.drawHandler = function(){
-  
-  this.ctx.beginPath();
-  this.ctx.arc(this.initialVector[0],this.initialVector[1], this.rockSpeed * 5, 0, 2 * Math.PI, false);
-  this.ctx.fillStyle = 'green';
-  this.ctx.fill();
-  this.ctx.lineWidth = 5;
-  this.ctx.strokeStyle = '#003300';
-  this.ctx.stroke();
-}
 
 Rock.prototype.checkCollisionWithWall = function(wall){
   const collision = this.x + this.size > wall.x && this.x + this.size < wall.x + wall.sizeX && this.y + this.size > wall.y ;
@@ -94,6 +84,5 @@ Rock.prototype.checkCollisionWithWall = function(wall){
 
 Rock.prototype.checkCollisionWithPlayer = function(player){
   const collision = this.x + this.size > player.x && this.x + this.size < player.x + player.size && this.y + this.size > player.y ;
-  console.log(collision)
   return collision;
 }
