@@ -36,10 +36,32 @@ p {
 
   margin: 20px;
   border: 1px solid black;
+  background: url(../img/skybg.gif);
+  background-size: contain;
 }
 /*---------Components ------------*/
 
 .game-container{
   width: 100%;
   height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article.logo-splash{
+  width: 60%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+article.logo-splash h1{
+  text-align: center;
+  font-size:7em;
+}
+article.logo-splash button{
+  width: 40%;
+  height: 10vh;
 }

@@ -16,8 +16,10 @@ function main(){
   function buildSplashScreen(){
     buildDom(`
     <section class="game-container">
-    <h1>STONE FIGHT</h1>
-    <button>PLAY</button>
+    <article class="logo-splash">
+      <h1>STONE FIGHT</h1>
+      <button>PLAY</button>
+    </article>
     </section>
     `)
     const buttonStart = document.querySelector('button');
