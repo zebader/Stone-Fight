@@ -2,7 +2,7 @@
 
 function Rock(canvas){
   this.canvas = canvas;
-  this.size = 20;
+  this.size = this.canvas.height/20;
   this.x = 0;
   this.y = 0;
   this.ctx = this.canvas.getContext('2d');
@@ -16,7 +16,7 @@ function Rock(canvas){
   this.ifStart = false;
 }
 Rock.prototype.resetValues = function(posX){
-  this.size = 20;
+  this.size = this.canvas.height/20;
   this.x = posX;
   this.y = 100;
   this.direction = 0;
@@ -28,9 +28,9 @@ Rock.prototype.resetValues = function(posX){
   this.ifStart = false;
 }
 
-Rock.prototype.setPositionStart = function(posX){
+Rock.prototype.setPositionStart = function(posX,posY){
   this.startX = posX;
-  this.startY = this.canvas.height-120;
+  this.startY = posY;
 }
 
 Rock.prototype.setThrowRockInitValues = function(){

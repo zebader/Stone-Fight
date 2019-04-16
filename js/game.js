@@ -65,9 +65,9 @@ Game.prototype.updateCanvas = function(){
   this.player.updateXPosition();
   this.player2.updateXPosition();
   if (this.turn % 2 !== 0) {
-    this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2);
+    this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2,this.player.y - this.rock.size);
   } else {
-    this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2);
+    this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2,this.player2.y - this.rock.size);
   }
   this.rock.updatePosition();
 }
