@@ -207,6 +207,14 @@ Game.prototype.drawPowerLine = function(){
   this.ctx.stroke();
 
   this.ctx.beginPath();
+  this.ctx.strokeStyle= 'yellow';
+  this.ctx.lineWidth = 1;
   this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius, 0, 2 * Math.PI);
+  this.ctx.stroke();
+
+  this.ctx.beginPath();
+  this.ctx.strokeStyle= 'yellow';
+  this.ctx.lineWidth = 3;
+  this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius+10, 0, (powerRadius/7)/(2 * Math.PI));
   this.ctx.stroke();
 }
