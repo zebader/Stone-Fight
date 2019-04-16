@@ -94,6 +94,8 @@ Game.prototype.switchPlayerTurn = function(){
   this.rock.x = 1000;
   this.turn ++;
   document.addEventListener('keydown', this.newMovement);
+  document.addEventListener('mousedown',  this.newInitialPos);
+  document.addEventListener('mouseup', this.newFinalPos);
 }
 
 Game.prototype.checkCollision = function(){
@@ -165,6 +167,8 @@ Game.prototype.setThrowValues = function(event){
 }
 
 Game.prototype.throwRock = function(event){
+  document.removeEventListener('mousedown',  this.newInitialPos);
+  document.removeEventListener('mouseup', this.newFinalPos);
   this.rock.ifStart = true;
   this.rock.setDirection(1);
   this.rock.setThrowRockValues();
