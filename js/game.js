@@ -186,15 +186,18 @@ Game.prototype.throwRock = function(event){
   this.rock.ifStart = true;
   this.rock.setDirection(1);
   this.rock.setThrowRockValues();
+  this.rock.initialVector = [];
+  this.finalVectorPos = null;
   
 }
 
 Game.prototype.setCursorPosition = function(event){
-  this.rock.initialVector
   this.finalVectorPos = [event.offsetX,event.offsetY];
 }
 
 Game.prototype.drawPowerLine = function(){
+  var setRadiusModule = [Math.abs(this.finalVectorPos[0] - this.rock.initialVector[0]),Math.abs(this.finalVectorPos[1] - this.rock.initialVector[1])];
+  var powerRadius = Math.floor((Math.sqrt(Math.pow(setRadiusModule[0],2) + Math.pow(setRadiusModule[1],2))));
 
   this.ctx.beginPath();
   this.ctx.strokeStyle= 'yellow';
@@ -203,9 +206,7 @@ Game.prototype.drawPowerLine = function(){
   this.ctx.lineTo(this.finalVectorPos[0], this.finalVectorPos[1]);
   this.ctx.stroke();
 
-/*   this.clearCanvas();
   this.ctx.beginPath();
-  this.ctx.moveTo(this.rock.initialVector[0], this.rock.initialVector[1]);
-  this.ctx.lineTo(event.offsetX, event.offsetY);
-  this.ctx.stroke(); */
+  this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius, 0, 2 * Math.PI);
+  this.ctx.stroke();
 }
