@@ -9,7 +9,7 @@ function Wall(canvas){
   this.ctx = this.canvas.getContext('2d');
   
   this.wallImg = new Image();
-  this.wallImg.src = "../img/wall.png";
+  this.wallImg.src = "./img/wall.png";
 }
 
 Wall.prototype.draw = function(){

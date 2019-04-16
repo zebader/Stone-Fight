@@ -16,10 +16,10 @@ function Game(canvas){
 
 Game.prototype.start = function(){
   this.backgroundImg = new Image();
-  this.backgroundImg.src = "../img/skybg.gif";
+  this.backgroundImg.src = "./img/skybg.gif";
 
   this.backgroundImg2 = new Image();
-  this.backgroundImg2.src = "../img/mountainsbg.png";
+  this.backgroundImg2.src = "./img/mountainsbg.png";
  
   this.player = new Player(this.canvas,this.canvas.width/5);
   this.player2 = new Player(this.canvas,4*this.canvas.width/5);

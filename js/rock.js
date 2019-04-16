@@ -76,7 +76,7 @@ Rock.prototype.draw = function(){
  // this.ctx.fillRect(this.x,this.y,this.size,this.size);
 
   this.rockImg = new Image();
-  this.rockImg.src = "../img/rock.gif";
+  this.rockImg.src = "./img/rock.gif";
   this.ctx.drawImage(this.rockImg,this.x,this.y,this.size,this.size);
 }
 
