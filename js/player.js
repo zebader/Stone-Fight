@@ -26,8 +26,9 @@ Player.prototype.setDirection = function(newDirection){
 }
 
 Player.prototype.draw = function(color){
-  this.ctx.fillStyle = color;
-  this.ctx.fillRect(this.x,this.y,this.size,this.size);
+  this.playerImg = new Image();
+  this.playerImg.src = "../img/player.gif";
+  this.ctx.drawImage(this.playerImg,this.x,this.y,this.size,this.size);
 }
 Player.prototype.setLives = function(){
   this.lives--;

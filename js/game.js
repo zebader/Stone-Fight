@@ -113,12 +113,28 @@ Game.prototype.checkCollision = function(){
     this.switchPlayerTurn();
   }
   if (this.rock.checkCollisionWithPlayer(this.player2)){
-    alert('You hit player2!')
+    this.player2.lives--
+    console.log('player2', this.player2.lives)
     this.switchPlayerTurn();
+    if(this.player2.lives === 0){
+      this.gameOver = true;
+      this.onGameOver();
+
+      var gameOverScreen = document.querySelector('h1');
+      gameOverScreen.innerHTML = "Player 1 wins"
+    }
   }
   if (this.rock.checkCollisionWithPlayer(this.player)){
-    alert('You hit player1!')
+    this.player.lives--
+    console.log('player', this.player.lives)
     this.switchPlayerTurn();
+    if(this.player.lives === 0){
+      this.gameOver = true;
+      this.onGameOver();
+
+      var gameOverScreen = document.querySelector('h1');
+      gameOverScreen.innerHTML = "Player 2 wins"
+    }
   }
   if (this.player.checkCollisionWithWall(this.wall)){
     this.player.x = this.wall.x - this.player.size;
@@ -215,6 +231,6 @@ Game.prototype.drawPowerLine = function(){
   this.ctx.beginPath();
   this.ctx.strokeStyle= 'yellow';
   this.ctx.lineWidth = 3;
-  this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius+10, 0, (powerRadius/7)/(2 * Math.PI));
+  this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius+10, 0, (powerRadius/9)/(2 * Math.PI));
   this.ctx.stroke();
 }
