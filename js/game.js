@@ -20,9 +20,15 @@ Game.prototype.start = function(){
 
   this.backgroundImg2 = new Image();
   this.backgroundImg2.src = "./img/mountainsbg.png";
+
+  this.hitAudio = new Audio('../sounds/hit.mp3');
+  this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
+  this.walkrockAudio = new Audio('../sounds/walk.mp3');
+  this.fallingkrockAudio = new Audio('../sounds/fallingrock.mp3');
+
  
   this.player = new Player(this.canvas,this.canvas.width/5);
-  this.player2 = new Player(this.canvas,4*this.canvas.width/5);
+  this.player2 = new Player(this.canvas,3.7*this.canvas.width/5);
   this.rock = new Rock(this.canvas);
   this.wall = new Wall(this.canvas);
 
@@ -66,9 +72,9 @@ Game.prototype.updateCanvas = function(){
   this.player.updateXPosition();
   this.player2.updateXPosition();
   if (this.turn % 2 !== 0) {
-    this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2,this.player.y - this.rock.size);
+    this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2,this.player.y - this.rock.size/2);
   } else {
-    this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2,this.player2.y - this.rock.size);
+    this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2,this.player2.y - this.rock.size/2);
   }
   this.rock.updatePosition();
 }
@@ -116,9 +122,13 @@ Game.prototype.switchPlayerTurn = function(){
 
 Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithWall(this.wall)){
+    this.fallingkrockAudio.pause();
+    this.hitrockAudio.play();
     this.switchPlayerTurn();
   }
   if (this.rock.checkCollisionWithPlayer(this.player2)){
+    this.fallingkrockAudio.pause();
+    this.hitAudio.play()
     this.player2.lives--
     console.log('player2', this.player2.lives)
     this.switchPlayerTurn();
@@ -131,6 +141,8 @@ Game.prototype.checkCollision = function(){
     }
   }
   if (this.rock.checkCollisionWithPlayer(this.player)){
+    this.fallingkrockAudio.pause();
+    this.hitAudio.play();
     this.player.lives--
     console.log('player', this.player.lives)
     this.switchPlayerTurn();
@@ -149,6 +161,8 @@ Game.prototype.checkCollision = function(){
     this.player2.x = this.wall.x + this.wall.sizeX;
   }
   if(this.rock.y > this.canvas.height ){
+    this.fallingkrockAudio.pause();
+    this.hitrockAudio.play();
     this.switchPlayerTurn();
   }
 }
@@ -164,20 +178,24 @@ Game.prototype.playerMovement = function(event){
 
   if(this.turn%2 !== 0){
     if(key === 37){
+      this.walkrockAudio.play()
       this.player.setDirection(-1);
       this.player2.setDirection(0);
     }
     else if (key === 39){
+      this.walkrockAudio.play()
       this.player.setDirection(1);
       this.player2.setDirection(0);
     }
   }
   else {
     if(key === 37){
+      this.walkrockAudio.play()
       this.player.setDirection(0);
       this.player2.setDirection(-1);
     }
     else if (key === 39){
+      this.walkrockAudio.play()
       this.player.setDirection(0);
       this.player2.setDirection(1);
     }
@@ -213,6 +231,8 @@ Game.prototype.throwRock = function(event){
   document.removeEventListener('mousemove', this.drawHandlerLine);
   this.rock.ifStart = true;
   this.rock.setDirection(1);
+  this.fallingkrockAudio = new Audio('../sounds/fallingrock.mp3');
+  this.fallingkrockAudio.play();
   this.rock.setThrowRockValues();
   this.rock.initialVector = [];
   this.finalVectorPos = null;

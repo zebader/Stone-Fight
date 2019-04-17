@@ -2,7 +2,7 @@
 
 function main(){
   var splashAudio = new Audio('../sounds/splash_2.mp3');
-  var gameAudio = new Audio('../sounds/8-Bit-Techno.mp3');
+  var gameAudio = new Audio('../sounds/game.mp3');
   var buttonAudio = new Audio('../sounds/playnow.mp3');
 
   splashAudio.play();
@@ -19,7 +19,6 @@ function main(){
     mainElement.innerHTML = html;
     return mainElement;
   }
-//<iframe src="../sounds/splash_2.mp3" allow="autoplay" style="display:none" id="iframeAudio"></iframe> 
    //===========SPLASH SCREEN
 
   function buildSplashScreen(){
@@ -29,7 +28,7 @@ function main(){
       <img src="./img/sf-logo.png">
       <img src="./img/splash-bright.png" class="img-bright">
       <button>PLAY NOW!</button>
-      <p>Use the arrows to move the character, when you are ready click and drag to set the power and direction of the shot</p>
+      <p>Use the arrows ( 🡄 🡆 ) to move the character, when you are ready click and drag ( ⇚ ➚ ) to set the power and direction of the shot, be careful, don't hit yourself !</p>
     </article>
     </section>
     `)
