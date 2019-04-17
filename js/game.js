@@ -200,11 +200,12 @@ Game.prototype.throwRock = function(event){
   let init = this.rock.initialVector;
   let final = this.finalVectorPos;
 
-  if(init[0] <=  final[0] && init[1] === final[1]){
-
-    return
+  if(init[0] === final[0] && init[1] === final[1]){
+    this.rock.initialVector = [];
+    this.finalVectorPos = null;
+     return
   }
-  
+
   document.removeEventListener('mousedown',  this.newInitialPos);
   document.removeEventListener('mouseup', this.newFinalPos);
   document.removeEventListener('mousemove', this.drawHandlerLine);
