@@ -2,7 +2,7 @@
 
 function Wall(canvas){
   this.canvas = canvas;
-  this.sizeY = canvas.height/1.4;
+  this.sizeY = canvas.height/1.3;
   this.sizeX = this.sizeY/7;
   this.x = canvas.width/2 - this.sizeX/2;
   this.y = canvas.height-this.sizeY;

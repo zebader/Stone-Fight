@@ -4,7 +4,7 @@ function Player(canvas,posX){
   this.canvas = canvas;
   this.size = this.canvas.height/6;
   this.x = posX;
-  this.y = canvas.height - (this.size+10);
+  this.y = canvas.height - (this.size+60);
   this.ctx = this.canvas.getContext('2d');;
   this.lives = 3;
   this.direction = 0;

@@ -16,7 +16,7 @@ function Game(canvas){
 
 Game.prototype.start = function(){
   this.backgroundImg = new Image();
-  this.backgroundImg.src = "./img/skybg.gif";
+  this.backgroundImg.src = "./img/clouds.png";
 
   this.backgroundImg2 = new Image();
   this.backgroundImg2.src = "./img/mountainsbg.png";
@@ -87,6 +87,9 @@ Game.prototype.drawCanvas = function(){
 }
 
 Game.prototype.drawBackground = function(){
+  this.ctx.fillStyle= '#eddcbe';
+  this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+
   this.ctx.drawImage(this.backgroundImg,this.backgroundXspeed ,0);
   this.ctx.drawImage(this.backgroundImg, this.backgroundImg.width - Math.abs(this.backgroundXspeed),0);
   this.ctx.drawImage(this.backgroundImg, this.backgroundImg.width*2 - Math.abs(this.backgroundXspeed),0);
@@ -197,12 +200,11 @@ Game.prototype.setThrowValues = function(event){
 }
 
 Game.prototype.throwRock = function(event){
-  let init = this.rock.initialVector;
+
   let final = this.finalVectorPos;
 
-  if(init[0] === final[0] && init[1] === final[1]){
+  if(final === null){
     this.rock.initialVector = [];
-    this.finalVectorPos = null;
      return
   }
 
