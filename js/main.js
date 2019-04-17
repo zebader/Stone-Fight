@@ -1,6 +1,15 @@
 'use strict';
 
+var splashAudio = new Audio('../sounds/splash_2.mp3');
+var gameAudio = new Audio('../sounds/8-Bit-Techno.mp3');
+var buttonAudio = new Audio('../sounds/playnow.mp3');
+
 function main(){
+  splashAudio.play();
+  splashAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
   
   //===========CREATE SCREENS============================================================
 
@@ -10,11 +19,11 @@ function main(){
     mainElement.innerHTML = html;
     return mainElement;
   }
-
+//<iframe src="../sounds/splash_2.mp3" allow="autoplay" style="display:none" id="iframeAudio"></iframe> 
    //===========SPLASH SCREEN
 
   function buildSplashScreen(){
-    buildDom(`
+    buildDom(`    
     <section class="game-container">
     <article class="logo-splash">
       <img src="./img/sf-logo.png">
@@ -24,13 +33,25 @@ function main(){
     </article>
     </section>
     `)
+
     const buttonStart = document.querySelector('button');
     buttonStart.addEventListener('click',buildGameScreen);
+    buttonStart.addEventListener('mouseenter',function(){
+      buttonAudio.currentTime = 0;
+      buttonAudio.play();
+    });
   }
 
   //===========GAME SCREEN
 
   function buildGameScreen(){
+    splashAudio.pause();
+    gameAudio.play();
+    gameAudio.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+  }, false);
+
     buildDom(`
     <section class="game-container">
      <canvas></canvas>
