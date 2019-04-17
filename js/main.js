@@ -17,8 +17,9 @@ function main(){
     buildDom(`
     <section class="game-container">
     <article class="logo-splash">
-      <h1>STONE FIGHT</h1>
-      <button>PLAY</button>
+      <img src="./img/sf-logo.png">
+      <button>PLAY NOW!</button>
+      <p>Use the arrows to move the character, when you are ready click and drag to set the power and direction of the shot</p>
     </article>
     </section>
     `)
