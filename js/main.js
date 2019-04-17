@@ -17,10 +17,8 @@ function main(){
     buildDom(`
     <section class="game-container">
     <article class="logo-splash">
-    <div>
       <img src="./img/sf-logo.png">
       <img src="./img/splash-bright.png" class="img-bright">
-    </div>
       <button>PLAY NOW!</button>
       <p>Use the arrows to move the character, when you are ready click and drag to set the power and direction of the shot</p>
     </article>
