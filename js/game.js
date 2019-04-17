@@ -97,7 +97,7 @@ Game.prototype.drawBackground = function(){
   if (Math.abs(this.backgroundXspeed) > this.backgroundImg.width) {
     this.backgroundXspeed = 0;
   }
-  this.backgroundXspeed -= 0.1;
+  this.backgroundXspeed -= 0.2;
 
   this.ctx.drawImage(this.backgroundImg2,0,this.canvas.height - this.backgroundImg2.height);
   this.ctx.drawImage(this.backgroundImg2,this.backgroundImg2.width,this.canvas.height - this.backgroundImg2.height);
@@ -228,20 +228,20 @@ Game.prototype.drawPowerLine = function(){
   var powerRadius = Math.floor((Math.sqrt(Math.pow(setRadiusModule[0],2) + Math.pow(setRadiusModule[1],2))));
 
   this.ctx.beginPath();
-  this.ctx.strokeStyle= 'yellow';
+  this.ctx.strokeStyle= '#522d31';
   this.ctx.lineWidth = 4;
   this.ctx.moveTo(this.rock.initialVector[0], this.rock.initialVector[1]);
   this.ctx.lineTo(this.finalVectorPos[0], this.finalVectorPos[1]);
   this.ctx.stroke();
 
   this.ctx.beginPath();
-  this.ctx.strokeStyle= 'yellow';
+  this.ctx.strokeStyle= '#522d31';
   this.ctx.lineWidth = 1;
   this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius, 0, 2 * Math.PI);
   this.ctx.stroke();
 
   this.ctx.beginPath();
-  this.ctx.strokeStyle= 'yellow';
+  this.ctx.strokeStyle= '#a0c200';
   this.ctx.lineWidth = 10;
   this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius+10, 0, (powerRadius/9)/(2 * Math.PI));
   this.ctx.stroke();
