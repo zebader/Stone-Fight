@@ -148,7 +148,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.currentTime = 0;
 
     this.hitrockAudio.play();
-    this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
 
     this.switchPlayerTurn();
   }
@@ -158,7 +158,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.currentTime = 0;
 
     this.hitAudio.play();
-    this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
     this.player2.lives--;
     this.player2.wasHit = true;
 
@@ -206,7 +206,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.pause();
     this.fallingkrockAudio.currentTime = 0;
     this.hitrockAudio.play();
-    this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
     this.switchPlayerTurn();
   }
 }

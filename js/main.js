@@ -1,9 +1,9 @@
 'use strict';
 
 function main(){
-  var splashAudio = new Audio('../sounds/splash_2.mp3');
-  var gameAudio = new Audio('../sounds/game.mp3');
-  var buttonAudio = new Audio('../sounds/playnow.mp3');
+  var splashAudio = new Audio('./sounds/splash_2.mp3');
+  var gameAudio = new Audio('./sounds/game.mp3');
+  var buttonAudio = new Audio('./sounds/playnow.mp3');
 
   splashAudio.play();
   splashAudio.addEventListener('ended', function() {
@@ -23,7 +23,7 @@ function main(){
 
   function buildSplashScreen(){
     buildDom(`
-    
+
     <section class="game-container">
     <article class="logo-splash">
 
