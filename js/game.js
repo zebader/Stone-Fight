@@ -124,6 +124,7 @@ Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithWall(this.wall)){
     this.fallingkrockAudio.pause();
     this.hitrockAudio.play();
+    this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
     this.switchPlayerTurn();
   }
   if (this.rock.checkCollisionWithPlayer(this.player2)){
