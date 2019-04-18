@@ -32,7 +32,6 @@ Player.prototype.setDirection = function(newDirection){
 
 Player.prototype.draw = function(){
   this.playerImg = new Image();
-  console.log(this.spritePos);
   
   this.playerImg.src = "./img/player-sprite.png";
   this.ctx.drawImage(this.playerImg,this.playerImg.height*this.spritePos,0,this.playerImg.height,this.playerImg.height,this.x,this.y,this.size,this.size);
