@@ -9,7 +9,6 @@ function Player(canvas,posX){
   this.lives = 3;
   this.direction = 0;
   this.speed = 3;
-  this.heartsImg = ["./img/life.png","./img/life2.png","./img/life3.png"]
   this.spritePos = 0;
   this.getHitByRock = false;
   this.playerTurn = false;
@@ -39,16 +38,18 @@ Player.prototype.draw = function(imgPlayer){
 
 Player.prototype.drawLife = function(posX,posY,size){
   this.lifeImg = new Image();
+  this.lifeImg.src = "./img/life.png";
+
   if(this.lives === 3){
-    this.lifeImg.src = this.heartsImg[0];
+    this.ctx.drawImage(this.lifeImg,this.lifeImg.height*0,0,this.lifeImg.height*3,this.lifeImg.height,posX,posY,size*3,size);
   }
   if(this.lives === 2){
-    this.lifeImg.src = this.heartsImg[1];
+    this.ctx.drawImage(this.lifeImg,(this.lifeImg.height*3)*1,0,this.lifeImg.height*3,this.lifeImg.height,posX,posY,size*3,size);
   }
   if(this.lives === 1){
-    this.lifeImg.src = this.heartsImg[2];
+    this.ctx.drawImage(this.lifeImg,(this.lifeImg.height*3)*2,0,this.lifeImg.height*3,this.lifeImg.height,posX,posY,size*3,size);
   }
-  this.ctx.drawImage(this.lifeImg,posX,posY,size*3,size);
+  //this.ctx.drawImage(this.lifeImg,posX,posY,size*3,size);
 }
 
 
