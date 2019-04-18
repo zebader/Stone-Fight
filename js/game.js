@@ -26,6 +26,7 @@ Game.prototype.start = function(){
   this.walkrockAudio = new Audio('./sounds/walk.mp3');
   this.fallingkrockAudio = new Audio('./sounds/fallingrock.mp3');
 
+
   this.player = new Player(this.canvas,this.canvas.width/5);
   this.player2 = new Player(this.canvas,3.7*this.canvas.width/5);
   this.rock = new Rock(this.canvas);
@@ -144,6 +145,8 @@ Game.prototype.switchPlayerTurn = function(){
 Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithWall(this.wall)){
     this.fallingkrockAudio.pause();
+    this.fallingkrockAudio.currentTime = 0;
+
     this.hitrockAudio.play();
     this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
 
@@ -152,6 +155,8 @@ Game.prototype.checkCollision = function(){
   if (this.rock.checkCollisionWithPlayer(this.player2)){
 
     this.fallingkrockAudio.pause();
+    this.fallingkrockAudio.currentTime = 0;
+
     this.hitAudio.play();
     this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
     this.player2.lives--;
@@ -172,6 +177,7 @@ Game.prototype.checkCollision = function(){
   }
   if (this.rock.checkCollisionWithPlayer(this.player)){
     this.fallingkrockAudio.pause();
+    this.fallingkrockAudio.currentTime = 0;
     this.hitAudio.play();
     this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
     this.player.lives--
@@ -198,6 +204,7 @@ Game.prototype.checkCollision = function(){
   }
   if(this.rock.y > this.canvas.height ){
     this.fallingkrockAudio.pause();
+    this.fallingkrockAudio.currentTime = 0;
     this.hitrockAudio.play();
     this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
     this.switchPlayerTurn();
@@ -215,6 +222,7 @@ Game.prototype.playerMovement = function(event){
 
   if(this.turn%2 !== 0){
     if(key === 37){
+      
       this.walkrockAudio.play()
       this.player.setDirection(-1);
       this.player2.setDirection(0);
@@ -248,7 +256,6 @@ Game.prototype.playerStopMovement = function(event){
 }
 
 Game.prototype.setThrowValues = function(event){
-  this.fallingkrockAudio.pause();
   document.addEventListener('mousemove', this.drawHandlerLine);
   this.player.blockPlayer();
   document.removeEventListener('keydown', this.newMovement)
@@ -268,7 +275,8 @@ Game.prototype.throwRock = function(event){
   document.removeEventListener('mousemove', this.drawHandlerLine);
   this.rock.ifStart = true;
   this.rock.setDirection(1);
-  this.fallingkrockAudio = new Audio('../sounds/fallingrock.mp3');
+  this.fallingkrockAudio.pause();
+  this.fallingkrockAudio.currentTime = 0;
   this.fallingkrockAudio.play();
   this.rock.setThrowRockValues();
   this.rock.initialVector = [];
