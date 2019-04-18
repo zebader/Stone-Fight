@@ -1,15 +1,8 @@
 'use strict';
 
 function main(){
-  var splashAudio = new Audio('./sounds/splash_2.mp3');
-  var gameAudio = new Audio('./sounds/game.mp3');
-  var buttonAudio = new Audio('./sounds/playnow.mp3');
 
-  splashAudio.play();
-  splashAudio.addEventListener('ended', function() {
-    this.currentTime = 0;
-    this.play();
-}, false);
+  var gameAudio = new Audio('./sounds/game.mp3');
   
   //===========CREATE SCREENS============================================================
 
@@ -37,16 +30,12 @@ function main(){
 
     const buttonStart = document.querySelector('button');
     buttonStart.addEventListener('click',buildGameScreen);
-    buttonStart.addEventListener('mouseenter',function(){
-      buttonAudio.currentTime = 0;
-      buttonAudio.play();
-    });
+
   }
 
   //===========GAME SCREEN
 
   function buildGameScreen(){
-    splashAudio.pause();
     gameAudio.play();
     gameAudio.addEventListener('ended', function() {
       this.currentTime = 0;
