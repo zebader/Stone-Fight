@@ -103,8 +103,8 @@ Game.prototype.updateCanvas = function(){
 
 Game.prototype.drawCanvas = function(){
   this.drawBackground();
-  this.player.draw();
-  this.player2.draw();
+  this.player.draw("./img/player-sprite.png");
+  this.player2.draw("./img/player2-sprite.png");
   this.player.drawLife(20,20,this.canvas.height/15);
   this.player2.drawLife(this.canvas.width - ((this.canvas.height/15)*3)-20,20,this.canvas.height/15);
   this.rock.draw();
