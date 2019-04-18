@@ -72,16 +72,32 @@ Game.prototype.updateCanvas = function(){
   this.player.updateXPosition();
   this.player2.updateXPosition();
   if (this.turn % 2 !== 0) {
-    this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2,this.player.y - this.rock.size/2);
-    this.player.spritePos = 1;
-    this.player2.spritePos = 0;
-  } else {
-    this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2,this.player2.y - this.rock.size/2);
-    this.player.spritePos = 0;
-    this.player2.spritePos = 1;
+    if (this.player2.wasHit) {
+      this.player2.spritePos = 2;      
+    } 
+    else if(this.player.wasHit) {
+      this.player.spritePos = 2;      
+    } 
+    else {
+      this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2,this.player.y - this.rock.size/2);
+      this.player.spritePos = 1;
+      this.player2.spritePos = 0;
+    }
+  } 
+  else {
+    if (this.player.wasHit) {
+      this.player.spritePos = 2;      
+    } 
+    else if(this.player2.wasHit) {
+      this.player2.spritePos = 2;      
+    } 
+    else {
+      this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2,this.player2.y - this.rock.size/2);
+      this.player.spritePos = 0;
+      this.player2.spritePos = 1;
+    }
   }
   this.rock.updatePosition();
-
 
 }
 
@@ -135,25 +151,31 @@ Game.prototype.checkCollision = function(){
     this.switchPlayerTurn();
   }
   if (this.rock.checkCollisionWithPlayer(this.player2)){
-    this.player2.spritePos = 2;
-    debugger
+    // this.player2.spritePos = 2;
     this.fallingkrockAudio.pause();
-    this.hitAudio.play()
-    this.player2.lives--
+    this.hitAudio.play();
+    this.player2.lives--;
+    this.player2.wasHit = true;
 
-    this.switchPlayerTurn();
-    if(this.player2.lives === 0){
-      this.gameOver = true;
-      this.onGameOver();
+      this.switchPlayerTurn();
+      if(this.player2.lives === 0){
+        this.gameOver = true;
+        this.onGameOver();
+        
+        var gameOverScreen = document.querySelector('h1');
+        gameOverScreen.innerHTML = "Player 1 wins"
+      }
 
-      var gameOverScreen = document.querySelector('h1');
-      gameOverScreen.innerHTML = "Player 1 wins"
-    }
+      setTimeout(() => {
+        this.player2.wasHit = false;
+      }, 1000)
   }
   if (this.rock.checkCollisionWithPlayer(this.player)){
     this.fallingkrockAudio.pause();
     this.hitAudio.play();
     this.player.lives--
+    this.player.wasHit = true;
+
     this.switchPlayerTurn();
     if(this.player.lives === 0){
       this.gameOver = true;
@@ -162,6 +184,10 @@ Game.prototype.checkCollision = function(){
       var gameOverScreen = document.querySelector('h1');
       gameOverScreen.innerHTML = "Player 2 wins"
     }
+
+    setTimeout(() => {
+      this.player.wasHit = false;
+    }, 1000)
   }
   if (this.player.checkCollisionWithWall(this.wall)){
     this.player.x = this.wall.x - this.player.size;
@@ -270,7 +296,13 @@ Game.prototype.drawPowerLine = function(){
 
   this.ctx.beginPath();
   this.ctx.strokeStyle= '#a0c200';
-  this.ctx.lineWidth = 10;
+  this.ctx.lineWidth = 15;
   this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius+10, 0, (powerRadius/9)/(2 * Math.PI));
+  this.ctx.stroke();
+
+  this.ctx.beginPath();
+  this.ctx.strokeStyle= '#86a30a';
+  this.ctx.lineWidth = 7;
+  this.ctx.arc(this.rock.initialVector[0], this.rock.initialVector[1], powerRadius+12, 0, (powerRadius/9)/(2 * Math.PI));
   this.ctx.stroke();
 }

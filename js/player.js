@@ -13,6 +13,7 @@ function Player(canvas,posX){
   this.spritePos = 0;
   this.getHitByRock = false;
   this.playerTurn = false;
+  this.wasHit = false;
 }
 
 Player.prototype.updateXPosition = function(){
