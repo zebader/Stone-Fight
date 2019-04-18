@@ -22,9 +22,11 @@ function main(){
    //===========SPLASH SCREEN
 
   function buildSplashScreen(){
-    buildDom(`    
+    buildDom(`
+    
     <section class="game-container">
     <article class="logo-splash">
+
       <img src="./img/sf-logo.png">
       <img src="./img/splash-bright.png" class="img-bright">
       <button>PLAY NOW!</button>

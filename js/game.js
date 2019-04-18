@@ -21,10 +21,10 @@ Game.prototype.start = function(){
   this.backgroundImg2 = new Image();
   this.backgroundImg2.src = "./img/mountainsbg.png";
 
-  this.hitAudio = new Audio('../sounds/hit.mp3');
-  this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
-  this.walkrockAudio = new Audio('../sounds/walk.mp3');
-  this.fallingkrockAudio = new Audio('../sounds/fallingrock.mp3');
+  this.hitAudio = new Audio('./sounds/hit.mp3');
+  this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
+  this.walkrockAudio = new Audio('./sounds/walk.mp3');
+  this.fallingkrockAudio = new Audio('./sounds/fallingrock.mp3');
 
  
   this.player = new Player(this.canvas,this.canvas.width/5);
@@ -73,10 +73,16 @@ Game.prototype.updateCanvas = function(){
   this.player2.updateXPosition();
   if (this.turn % 2 !== 0) {
     this.rock.setPositionStart(this.player.updateXPosition()+this.player.size/2-this.rock.size/2,this.player.y - this.rock.size/2);
+    this.player.spritePos = 1;
+    this.player2.spritePos = 0;
   } else {
     this.rock.setPositionStart(this.player2.updateXPosition()+this.player2.size/2-this.rock.size/2,this.player2.y - this.rock.size/2);
+    this.player.spritePos = 0;
+    this.player2.spritePos = 1;
   }
   this.rock.updatePosition();
+
+
 }
 
 Game.prototype.drawCanvas = function(){
@@ -125,13 +131,16 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.pause();
     this.hitrockAudio.play();
     this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
+
     this.switchPlayerTurn();
   }
   if (this.rock.checkCollisionWithPlayer(this.player2)){
+    this.player2.spritePos = 2;
+    debugger
     this.fallingkrockAudio.pause();
     this.hitAudio.play()
     this.player2.lives--
-    console.log('player2', this.player2.lives)
+
     this.switchPlayerTurn();
     if(this.player2.lives === 0){
       this.gameOver = true;
@@ -145,7 +154,6 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.pause();
     this.hitAudio.play();
     this.player.lives--
-    console.log('player', this.player.lives)
     this.switchPlayerTurn();
     if(this.player.lives === 0){
       this.gameOver = true;
@@ -219,7 +227,6 @@ Game.prototype.setThrowValues = function(event){
 }
 
 Game.prototype.throwRock = function(event){
-
   let final = this.finalVectorPos;
 
   if(final === null){

@@ -10,6 +10,9 @@ function Player(canvas,posX){
   this.direction = 0;
   this.speed = 3;
   this.heartsImg = ["./img/life.png","./img/life2.png","./img/life3.png"]
+  this.spritePos = 0;
+  this.getHitByRock = false;
+  this.playerTurn = false;
 }
 
 Player.prototype.updateXPosition = function(){
@@ -28,9 +31,12 @@ Player.prototype.setDirection = function(newDirection){
 
 Player.prototype.draw = function(){
   this.playerImg = new Image();
-  this.playerImg.src = "./img/player.png";
-  this.ctx.drawImage(this.playerImg,this.x,this.y,this.size,this.size);
+  console.log(this.spritePos);
+  
+  this.playerImg.src = "./img/player-sprite.png";
+  this.ctx.drawImage(this.playerImg,this.playerImg.height*this.spritePos,0,this.playerImg.height,this.playerImg.height,this.x,this.y,this.size,this.size);
 }
+
 Player.prototype.drawLife = function(posX,posY,size){
   this.lifeImg = new Image();
   if(this.lives === 3){
