@@ -167,8 +167,8 @@ Game.prototype.checkCollision = function(){
         this.gameOver = true;
         this.onGameOver();
         
-        var gameOverScreen = document.querySelector('h1');
-        gameOverScreen.innerHTML = "Player 1 wins"
+        var gameOverScreen = document.querySelector('.player-winner');
+        gameOverScreen.setAttribute("src", "./img/player1-wins.png");
       }
 
       setTimeout(() => {
@@ -188,8 +188,8 @@ Game.prototype.checkCollision = function(){
       this.gameOver = true;
       this.onGameOver();
 
-      var gameOverScreen = document.querySelector('h1');
-      gameOverScreen.innerHTML = "Player 2 wins"
+      var gameOverScreen = document.querySelector('.player-winner');
+      gameOverScreen.setAttribute("src", "./img/player2-wins.png");
     }
 
     setTimeout(() => {

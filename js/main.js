@@ -3,6 +3,7 @@
 function main(){
 
   var gameAudio = new Audio('./sounds/game.mp3');
+  var gameOverAudio = new Audio('./sounds/gameover.mp3');
   
   //===========CREATE SCREENS============================================================
 
@@ -67,10 +68,19 @@ function main(){
   }
   //===========GAMEOVER SCREEN
   function buildGameOverScreen(){
+
+    gameAudio.pause();
+    gameAudio.currentTime = 0;
+    gameOverAudio.play();
     buildDom(`
     <section class="game-container">
-    <h1>Game Over</h1>
-    <button>PLAY AGAIN</button>
+    <article class="logo-splash">
+
+      <img src="" class="player-winner">
+      <img src="./img/splash-bright.png" class="img-bright">
+      <button>PLAY AGAIN</button>
+      <p>"What a loser... try again!"</p>
+    </article>
     </section>
     `)
     const buttonStart = document.querySelector('button');
