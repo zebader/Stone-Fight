@@ -21,10 +21,10 @@ Game.prototype.start = function(){
   this.backgroundImg2 = new Image();
   this.backgroundImg2.src = "./img/mountainsbg.png";
 
-  this.hitAudio = new Audio('./sounds/hit.mp3');
-  this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
-  this.walkrockAudio = new Audio('./sounds/walk.mp3');
-  this.fallingkrockAudio = new Audio('./sounds/fallingrock.mp3');
+  this.hitAudio = new Audio('./../sounds/hit.mp3');
+  this.hitrockAudio = new Audio('./../sounds/hitrock.mp3');
+  this.walkrockAudio = new Audio('./../sounds/walk.mp3');
+  this.fallingkrockAudio = new Audio('./../sounds/fallingrock.mp3');
 
 
   this.player = new Player(this.canvas,this.canvas.width/5);
@@ -148,7 +148,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.currentTime = 0;
 
     this.hitrockAudio.play();
-    this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./../sounds/hitrock.mp3');
 
     this.switchPlayerTurn();
   }
@@ -158,7 +158,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.currentTime = 0;
 
     this.hitAudio.play();
-    this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./../sounds/hitrock.mp3');
     this.player2.lives--;
     this.player2.wasHit = true;
 
@@ -179,7 +179,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.pause();
     this.fallingkrockAudio.currentTime = 0;
     this.hitAudio.play();
-    this.hitrockAudio = new Audio('../sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./../sounds/hitrock.mp3');
     this.player.lives--
     this.player.wasHit = true;
 
@@ -206,7 +206,7 @@ Game.prototype.checkCollision = function(){
     this.fallingkrockAudio.pause();
     this.fallingkrockAudio.currentTime = 0;
     this.hitrockAudio.play();
-    this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
+    this.hitrockAudio = new Audio('./../sounds/hitrock.mp3');
     this.switchPlayerTurn();
   }
 }
