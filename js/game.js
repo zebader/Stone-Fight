@@ -41,10 +41,10 @@ Game.prototype.start = function(){
   this.drawHandlerLine = this.setCursorPosition.bind(this);
 
   document.addEventListener('keydown', this.newMovement);
-  document.addEventListener('mousedown',  this.newInitialPos);
-  document.addEventListener('mouseup', this.newFinalPos);
+  this.canvas.addEventListener('mousedown',  this.newInitialPos);
+  this.canvas.addEventListener('mouseup', this.newFinalPos);
   document.addEventListener('keyup', this.stopMovement);
-  document.removeEventListener('click',  this.newInitialPos);
+  this.canvas.removeEventListener('click',  this.newInitialPos);
 };
 
 //Star game loop ----------
@@ -138,8 +138,8 @@ Game.prototype.switchPlayerTurn = function(){
   this.rock.x = 1000;
   this.turn ++;
   document.addEventListener('keydown', this.newMovement);
-  document.addEventListener('mousedown',  this.newInitialPos);
-  document.addEventListener('mouseup', this.newFinalPos);
+  this.canvas.addEventListener('mousedown',  this.newInitialPos);
+  this.canvas.addEventListener('mouseup', this.newFinalPos);
 }
 
 Game.prototype.checkCollision = function(){
@@ -167,7 +167,7 @@ Game.prototype.checkCollision = function(){
         this.gameOver = true;
         this.onGameOver();
         
-        var gameOverScreen = document.querySelector('.player-winner');
+        var gameOverScreen = this.canvas.querySelector('.player-winner');
         gameOverScreen.setAttribute("src", "./img/player1-wins.png");
       }
 
@@ -256,7 +256,7 @@ Game.prototype.playerStopMovement = function(event){
 }
 
 Game.prototype.setThrowValues = function(event){
-  document.addEventListener('mousemove', this.drawHandlerLine);
+  this.canvas.addEventListener('mousemove', this.drawHandlerLine);
   this.player.blockPlayer();
   document.removeEventListener('keydown', this.newMovement)
   this.rock.setThrowRockInitValues();
@@ -270,9 +270,9 @@ Game.prototype.throwRock = function(event){
      return
   }
 
-  document.removeEventListener('mousedown',  this.newInitialPos);
-  document.removeEventListener('mouseup', this.newFinalPos);
-  document.removeEventListener('mousemove', this.drawHandlerLine);
+  this.canvas.removeEventListener('mousedown',  this.newInitialPos);
+  this.canvas.removeEventListener('mouseup', this.newFinalPos);
+  this.canvas.removeEventListener('mousemove', this.drawHandlerLine);
   this.rock.ifStart = true;
   this.rock.setDirection(1);
   this.fallingkrockAudio.pause();

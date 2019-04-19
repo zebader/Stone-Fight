@@ -87,6 +87,6 @@ Rock.prototype.checkCollisionWithWall = function(wall){
 }
 
 Rock.prototype.checkCollisionWithPlayer = function(player){
-  const collision = this.x + this.size/2 > player.x && this.x + this.size/2 < player.x + player.size && this.y - this.size/2 > player.y ;
+  const collision = this.x + this.size/2 > player.x && this.x < player.x + player.size && this.y - this.size/2 > player.y ;
   return collision;
 }
