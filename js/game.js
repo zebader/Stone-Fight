@@ -23,7 +23,6 @@ Game.prototype.start = function(){
 
   this.hitAudio = new Audio('./sounds/hit.mp3');
   this.hitrockAudio = new Audio('./sounds/hitrock.mp3');
-  this.walkrockAudio = new Audio('./sounds/walk.mp3');
   this.fallingkrockAudio = new Audio('./sounds/fallingrock.mp3');
 
 
@@ -222,25 +221,20 @@ Game.prototype.playerMovement = function(event){
 
   if(this.turn%2 !== 0){
     if(key === 37){
-      
-      this.walkrockAudio.play()
       this.player.setDirection(-1);
       this.player2.setDirection(0);
     }
     else if (key === 39){
-      this.walkrockAudio.play()
       this.player.setDirection(1);
       this.player2.setDirection(0);
     }
   }
   else {
     if(key === 37){
-      this.walkrockAudio.play()
       this.player.setDirection(0);
       this.player2.setDirection(-1);
     }
     else if (key === 39){
-      this.walkrockAudio.play()
       this.player.setDirection(0);
       this.player2.setDirection(1);
     }
