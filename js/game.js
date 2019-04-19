@@ -166,7 +166,7 @@ Game.prototype.checkCollision = function(){
         this.gameOver = true;
         this.onGameOver();
         
-        var gameOverScreen = this.canvas.querySelector('.player-winner');
+        var gameOverScreen = document.querySelector('.player-winner');
         gameOverScreen.setAttribute("src", "./img/player1-wins.png");
       }
 
